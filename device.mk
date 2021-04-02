@@ -84,6 +84,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.ir-service.example
 
+# DebugFS
+PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
+
 # Dex
 WITH_DEXPREOPT := true
 WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
