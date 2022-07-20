@@ -21,6 +21,7 @@ vendor.audio.usb.super_hifi=true
 vendor.audiohal.telephonytx.type=2
 
 # Bluetooth
+bluetooth.hardware.power.operating_voltage_mv=3300
 ro.vendor.bt.platform=6877
 ro.vendor.mtk.bt_sap_enable=true
 
