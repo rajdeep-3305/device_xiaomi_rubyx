@@ -9,3 +9,9 @@ binder_call(hal_dms_default, hal_audio_default)
 type vendor_dolby_file, data_file_type, file_type;
 allow hal_dms_default vendor_dolby_file:dir rw_dir_perms;
 allow hal_dms_default vendor_dolby_file:file create_file_perms;
+
+# Allow find operation for hal_dms_default on dms_hwservice
+allow hal_dms_default hal_dms_hwservice:hwservice_manager find;
+
+# Allow add operation for hal_dms_default on dms_hwservice
+allow hal_dms_default hal_dms_hwservice:hwservice_manager add;
