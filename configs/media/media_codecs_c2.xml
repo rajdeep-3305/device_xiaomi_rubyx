@@ -26,6 +26,7 @@
             <Alias name="OMX.MTK.VIDEO.DECODER.MPEG4" />
             <Limit name="size" min="16x16" max="2048x1088" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-1920x1088" value="30" />
         </MediaCodec>
@@ -33,6 +34,7 @@
             <Alias name="OMX.MTK.VIDEO.DECODER.H263" />
             <Limit name="size" min="128x96" max="1408x1152" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-1280x720" value="30" />
         </MediaCodec>
@@ -41,6 +43,7 @@
             <Limit name="size" min="64x64" max="4096x2176" />
             <Quirk name="wants-NAL-fragments" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
@@ -50,6 +53,7 @@
             <Quirk name="wants-NAL-fragments" />
             <Feature name="secure-playback" required="true" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="1" />
             <Limit name="performance-point-1920x1088" value="30" />
         </MediaCodec>
@@ -57,6 +61,7 @@
             <Alias name="OMX.MTK.VIDEO.DECODER.HEVC" />
             <Limit name="size" min="16x16" max="4096x2176" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
@@ -65,6 +70,7 @@
             <Limit name="size" min="16x16" max="1920x1088" />
             <Feature name="secure-playback" required="true" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="1" />
             <Limit name="performance-point-1920x1088" value="30" />
         </MediaCodec>
@@ -72,6 +78,7 @@
             <Alias name="OMX.MTK.VIDEO.DECODER.HEIF" />
             <Limit name="size" min="16x16" max="5120x2560" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="16" />
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
@@ -79,6 +86,7 @@
             <Alias name="OMX.MTK.VIDEO.DECODER.VPX" />
             <Limit name="size" min="16x16" max="2048x1088" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-1920x1088" value="30" />
         </MediaCodec>
@@ -86,6 +94,7 @@
             <Alias name="OMX.MTK.VIDEO.DECODER.VP9" />
             <Limit name="size" min="16x16" max="4096x2176" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
@@ -95,6 +104,7 @@
             <Quirk name="wants-NAL-fragments" />
             <Feature name="secure-playback" required="true" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="1" />
             <Limit name="performance-point-1920x1088" value="30" />
         </MediaCodec>
@@ -102,6 +112,7 @@
             <Alias name="OMX.MTK.VIDEO.DECODER.AV1" />
             <Limit name="size" min="16x16" max="4096x2176" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
@@ -112,11 +123,13 @@
             <Feature name="adaptive-playback"/>
             <Limit name="concurrent-instances" max="2" />
             <Limit name="performance-point-1920x1088" value="30" />
+            <Feature name="can-swap-width-height" value="1" />
         </MediaCodec>
         <MediaCodec name="c2.mtk.mpeg2.decoder" type="video/mpeg2" >
             <Alias name="OMX.MTK.VIDEO.DECODER.MPEG2" />
             <Limit name="size" min="16x16" max="2048x1088" />
             <Feature name="adaptive-playback"/>
+            <Feature name="can-swap-width-height" value="1" />
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-1920x1088" value="30" />
         </MediaCodec>
@@ -125,6 +138,7 @@
             <Limit name="size" min="16x16" max="1920x1088" />
             <Limit name="concurrent-instances" max="32" />
             <Limit name="performance-point-1920x1088" value="30" />
+            <Feature name="can-swap-width-height" value="1" />
         </MediaCodec>
     </Decoders>
     <Encoders>
@@ -135,6 +149,7 @@
             <Limit name="block-size" value="16x16" />
             <Limit name="concurrent-instances" max="10" />
             <Limit name="performance-point-640x480" value="30" />
+            <Feature name="can-swap-width-height" value="1" />
         </MediaCodec>
         <MediaCodec name="c2.mtk.mpeg4.encoder" type="video/mp4v-es" >
             <Alias name="OMX.MTK.VIDEO.ENCODER.MPEG4" />
@@ -143,6 +158,7 @@
             <Limit name="block-size" value="16x16" />
             <Limit name="concurrent-instances" max="10" />
             <Limit name="performance-point-640x480" value="30" />
+            <Feature name="can-swap-width-height" value="1" />  
         </MediaCodec>
         <MediaCodec name="c2.mtk.avc.encoder" type="video/avc" >
             <Alias name="OMX.MTK.VIDEO.ENCODER.AVC" />
@@ -152,6 +168,7 @@
             <Limit name="concurrent-instances" max="10" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Limit name="performance-point-1280x720" value="200" />
+            <Feature name="can-swap-width-height" value="1" />
         </MediaCodec>
         <MediaCodec name="c2.mtk.avc.encoder.secure" type="video/avc" >
             <Limit name="size" min="160x128" max="1920x1088" />
@@ -160,6 +177,7 @@
             <Limit name="concurrent-instances" max="10" />
             <Limit name="performance-point-1920x1088" value="30" />
             <Feature name="special-codec" required="true" />
+            <Feature name="can-swap-width-height" value="1" />
         </MediaCodec>
         <MediaCodec name="c2.mtk.hevc.encoder" type="video/hevc" >
             <Alias name="OMX.MTK.VIDEO.ENCODER.HEVC" />
@@ -171,6 +189,7 @@
             <Feature name="bitrate-modes" value="VBR,CBR,CQ" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Limit name="performance-point-1280x720" value="200" />
+            <Feature name="can-swap-width-height" value="1" />
         </MediaCodec>
         <MediaCodec name="c2.mtk.heif.encoder" type="image/vnd.android.heic" >
             <Alias name="OMX.MTK.VIDEO.ENCODER.HEIF" />
@@ -181,6 +200,7 @@
             <Limit name="concurrent-instances" max="16" />
             <Feature name="bitrate-modes" value="VBR,CBR,CQ" />
             <Limit name="performance-point-3840x2160" value="30" />
-        </MediaCodec>
+            <Feature name="can-swap-width-height" value="1" />      
+         </MediaCodec>
     </Encoders>
 </MediaCodecs>
