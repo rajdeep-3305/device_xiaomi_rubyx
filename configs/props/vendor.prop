@@ -279,6 +279,7 @@ ro.vendor.wifi.sap.concurrent.iface=ap1
 ro.vendor.wifi.sap.interface=ap0
 ro.vendor.wlan.chrdev=wmt_chrdev_wifi
 ro.vendor.wlan.gen=gen4m
+wifi.supplicant_scan_interval=120
 
 # HWUI
 debug.hwui.target_cpu_time_percent=30
