@@ -286,6 +286,7 @@ debug.hwui.target_cpu_time_percent=30
 debug.hwui.use_hint_manager=true
 
 # ZRAM
+ro.zram_backing_device_min_free_mb=1536
 ro.zram.mark_idle_delay_mins=60
 ro.zram.first_wb_delay_mins=180
 ro.zram.periodic_wb_delay_hours=24
