@@ -45,6 +45,7 @@ PRODUCT_VENDOR_PROPERTIES += \
     persist.log.tag.GsmCdmaConn=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.GsmCdmaPhone=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.hwcomposer=$(VENDOR_LOG_LEVEL) \
+    persist.log.tag.GPUAUX=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.HWUI=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.IccCardProxy=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.IccPhoneBookIM=$(VENDOR_LOG_LEVEL) \
