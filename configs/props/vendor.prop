@@ -205,6 +205,11 @@ ro.vendor.mtk_nn_support=1
 # Perf
 ro.vendor.perf.framepacing.enable=1
 
+# Platform
+ro.board.platform=mt6877
+ro.soc.manufacturer=Mediatek
+ro.soc.model=MT6877
+
 # Power
 vendor.powerhal.interaction.max=200
 vendor.powerhal.interaction.min=30
