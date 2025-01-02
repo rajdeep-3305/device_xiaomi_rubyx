@@ -43,6 +43,10 @@ TARGET_DYNAMIC_64_32_DRMSERVER := true
 # Assert
 TARGET_OTA_ASSERT_DEVICE := ruby,rubyx
 
+# Bootconfig
+BOARD_BOOTCONFIG += \
+    androidboot.serialconsole=0
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := ruby
 TARGET_NO_BOOTLOADER := true
