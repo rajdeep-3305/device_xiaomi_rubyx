@@ -1,4 +1,6 @@
 on init
+    setprop ro.boot.hardware.revision ${ro.boot.rsc}
+
     write /sys/module/musb_hdrc/parameters/mu3d_force_on 1
 
     # Set xiaomi touch permissions
