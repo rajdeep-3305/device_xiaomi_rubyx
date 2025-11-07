@@ -93,9 +93,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.ir-service.example
 
-# DeviceAsWebcam
-TARGET_BUILD_DEVICE_AS_WEBCAM := true
-
 # Dex
 WITH_DEXPREOPT := true
 WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
