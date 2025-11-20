@@ -1,9 +1,5 @@
 # Pinned blobs from ruby-user 14 UP1A.230620.001 OS2.0.10.0.UMOMIXM release-keys
 
-# AEE
-vendor/lib/libaedv.so|3b93f72ef0f78cf7224f01bfd27b51e651346661
-vendor/lib64/libaedv.so|fee02aec424ebd79a82d646a0087aac0e85508fe
-
 # Audio
 vendor/etc/smartpa_param/AW_DSP.bin|23a09a72f69a98793d47facf968cf265424d965a
 vendor/firmware/aw882xx_acf.bin|4ca9e570f8290a644d6cb1114fa3aafed208c94a
