@@ -389,5 +389,5 @@ $(call inherit-product-if-exists, device/xiaomi/miuicamera-rubyx/device.mk)
 $(call inherit-product, vendor/xiaomi/rubyx/rubyx-vendor.mk)
 
 # Include private keys
--include vendor/infinity-priv/keys/keys.mk
+-include vendor/lineage-priv/keys/keys.mk
 
