@@ -382,6 +382,9 @@ PRODUCT_SOONG_NAMESPACES += \
 # Speed profile services and wifi-service to reduce RAM and storage
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 
+# System server verbosity
+PRODUCT_SYSTEM_SERVER_DEBUG_INFO := false
+
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal-service.mediatek
