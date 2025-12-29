@@ -287,7 +287,7 @@ ro.vendor.wlan.gen=gen4m
 debug.hwui.target_cpu_time_percent=30
 debug.hwui.use_hint_manager=true
 
-# ZRAM writeback
+# ZRAM
 ro.zram.mark_idle_delay_mins=60
 ro.zram.first_wb_delay_mins=180
 ro.zram.periodic_wb_delay_hours=24
