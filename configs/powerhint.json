@@ -280,7 +280,13 @@
       "PowerHint": "INTERACTION",
       "Node": "GPUBlockBoost",
       "Duration": 1500,
-      "Value": "0"
+      "Value": "50"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "GPUSchedMode",
+      "Duration": 1500,
+      "Value": "1"
     },
     {
       "PowerHint": "INTERACTION",
