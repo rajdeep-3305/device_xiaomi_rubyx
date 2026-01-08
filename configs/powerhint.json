@@ -307,6 +307,18 @@
     },
     {
       "PowerHint": "LAUNCH",
+      "Node": "GPUBlockBoost",
+      "Duration": 3000,
+      "Value": "100"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "GPUSchedMode",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "LAUNCH",
       "Node": "SchedBoost",
       "Duration": 3000,
       "Value": "1"
