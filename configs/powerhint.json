@@ -375,13 +375,13 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "FGUclampMin",
       "Duration": 0,
-      "Value": "100"
+      "Value": "30"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "TAUclampMin",
       "Duration": 0,
-      "Value": "100"
+      "Value": "30"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
