@@ -132,6 +132,18 @@
       "DefaultIndex": 0
     },
     {
+      "Name": "GPUBlockBoost",
+      "Path": "/sys/kernel/ged/hal/gpu_boost_level",
+      "Values": [
+        "100",
+        "50",
+        "0",
+        "-1"
+      ],
+      "ResetOnInit": true,
+      "DefaultIndex": 2
+    },
+    {
       "Name": "FGUclampMin",
       "Path": "/dev/cpuctl/foreground/cpu.uclamp.min",
       "Values": [
