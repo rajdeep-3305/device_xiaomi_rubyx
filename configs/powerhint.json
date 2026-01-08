@@ -355,6 +355,12 @@
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "GPUBlockBoost",
+      "Duration": 0,
+      "Value": "50"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "CPUBigClusterMinFreq",
       "Duration": 0,
       "Value": "2600000"
