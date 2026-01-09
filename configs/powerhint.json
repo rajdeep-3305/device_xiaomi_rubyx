@@ -109,29 +109,6 @@
       "ResetOnInit": true
     },
     {
-      "Name": "GPUSchedPeriod",
-      "Path": "/sys/devices/platform/13000000.mali/js_scheduling_period",
-      "Values": [
-        "100",
-        "75",
-        "50",
-        "0"
-      ],
-      "ResetOnInit": true,
-      "DefaultIndex": 0
-    },
-    {
-      "Name": "GPUDVFSInterval",
-      "Path": "/sys/devices/platform/13000000.mali/dvfs_period",
-      "Values": [
-        "100",
-        "75",
-        "50"
-      ],
-      "ResetOnInit": true,
-      "DefaultIndex": 0
-    },
-    {
       "Name": "GPUBlockBoost",
       "Path": "/sys/kernel/ged/hal/gpu_boost_level",
       "Values": [
