@@ -247,6 +247,12 @@
       "Value": "1"
     },
     {
+      "PowerHint": "INTERACTION",
+      "Node": "GPUBlockBoost",
+      "Duration": 1000,
+      "Value": "0"
+    },
+    {
       "PowerHint": "LAUNCH",
       "Node": "CPUBigClusterMaxFreq",
       "Duration": 3000,
