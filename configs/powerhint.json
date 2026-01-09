@@ -241,6 +241,12 @@
       "Value": "15"
     },
     {
+      "PowerHint": "INTERACTION",
+      "Node": "DRAMOppMin",
+      "Duration": 1000,
+      "Value": "1"
+    },
+    {
       "PowerHint": "LAUNCH",
       "Node": "CPUBigClusterMaxFreq",
       "Duration": 3000,
