@@ -232,7 +232,7 @@
       "PowerHint": "INTERACTION",
       "Node": "TAUclampMin",
       "Duration": 1000,
-      "Value": "40"
+      "Value": "60"
     },
     {
       "PowerHint": "INTERACTION",
