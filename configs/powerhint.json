@@ -262,13 +262,13 @@
       "PowerHint": "INTERACTION",
       "Node": "TAUclampMin",
       "Duration": 1500,
-      "Value": "40"
+      "Value": "60"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "FGUclampMin",
       "Duration": 1500,
-      "Value": "15"
+      "Value": "30"
     },
     {
       "PowerHint": "INTERACTION",
@@ -406,7 +406,7 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "TAUclampMin",
       "Duration": 0,
-      "Value": "50"
+      "Value": "90"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
