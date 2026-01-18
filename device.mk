@@ -54,9 +54,6 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl:32
 
 PRODUCT_PACKAGES += \
-    XiaomiDolby
-
-PRODUCT_PACKAGES += \
     libdynproc:32 \
     libhapticgenerator:32
 
