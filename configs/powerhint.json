@@ -238,61 +238,61 @@
     {
       "PowerHint": "INTERACTION",
       "Node": "CPULittleClusterMaxFreq",
-      "Duration": 1500,
+      "Duration": 1000,
       "Value": "-1"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPULittleClusterMinFreq",
-      "Duration": 1500,
+      "Duration": 1000,
       "Value": "1703000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBigClusterMaxFreq",
-      "Duration": 1500,
+      "Duration": 1000,
       "Value": "-1"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBigClusterMinFreq",
-      "Duration": 1500,
+      "Duration": 1000,
       "Value": "2000000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "TAUclampMin",
-      "Duration": 1500,
-      "Value": "60"
+      "Duration": 800,
+      "Value": "40"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "FGUclampMin",
-      "Duration": 1500,
-      "Value": "30"
+      "Duration": 1000,
+      "Value": "15"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "DRAMOppMin",
-      "Duration": 1500,
+      "Duration": 1000,
       "Value": "1"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "GPUBlockBoost",
-      "Duration": 1500,
+      "Duration": 1000,
       "Value": "50"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "GPUSchedMode",
-      "Duration": 1500,
-      "Value": "1"
+      "Duration": 1000,
+      "Value": "0"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "SchedBoost",
-      "Duration": 1500,
+      "Duration": 800,
       "Value": "1"
     },
     {
