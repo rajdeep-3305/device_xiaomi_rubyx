@@ -1,4 +1,4 @@
-# Unpinned blobs from HyperOS OS2.0.9.0.UMOMIXM (ruby) recovery package
+# Unpinned blobs from HyperOS OS2.0.10.0.UMOMIXM (ruby) recovery package
 
 audio_dsp.img;AB
 cam_vpu1.img;AB
