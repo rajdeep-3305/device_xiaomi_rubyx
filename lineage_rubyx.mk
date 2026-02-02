@@ -25,3 +25,12 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildFingerprint=Redmi/ruby_global/ruby:14/UP1A.230620.001/OS2.0.10.0.UMOMIXM:user/release-keys \
     SystemName=ruby_global \
     SystemDevice=ruby
+
+# Axion Stuff
+TARGET_ENABLE_BLUR := true
+TARGET_INCLUDE_VIPERFX := true
+AXION_CAMERA_REAR_INFO := 200/50,8,2
+AXION_CAMERA_FRONT_INFO := 16
+AXION_MAINTAINER := Casanova.
+AXION_PROCESSOR := MediaTek_Dimensity_1080_(MT6877V)_(6nm)
+TARGET_INCLUDES_LOS_PREBUILTS := true

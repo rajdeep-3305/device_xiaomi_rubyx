@@ -406,3 +406,10 @@ $(call inherit-product, vendor/xiaomi/rubyx/rubyx-vendor.mk)
 # Include private keys
 -include vendor/infinity-priv/keys/keys.mk
 
+# Axion Stuff
+PERF_GOV_SUPPORTED := true
+PERF_DEFAULT_GOV := schedutil
+PERF_ANIM_OVERRIDE := true
+TORCH_STR_SUPPORTED := true
+TARGET_NEEDS_DOZE_FIX := true
+TARGET_SUPPORTED_REFRESH_RATES := 60,120
