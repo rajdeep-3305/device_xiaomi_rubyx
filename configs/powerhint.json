@@ -2,7 +2,7 @@
   "Nodes": [
     {
       "Name": "CPULittleClusterMaxFreq",
-      "Path": "/proc/ppm/policy/cluster_0_max_freq",
+      "Path": "/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq",
       "Values": [
         "-1",
         "2000000",
@@ -27,7 +27,7 @@
     },
     {
       "Name": "CPULittleClusterMinFreq",
-      "Path": "/proc/ppm/policy/cluster_0_min_freq",
+      "Path": "/sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq",
       "Values": [
         "2000000",
         "1903000",
@@ -51,7 +51,7 @@
     },
     {
       "Name": "CPUBigClusterMaxFreq",
-      "Path": "/proc/ppm/policy/cluster_1_max_freq",
+      "Path": "/sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq",
       "Values": [
         "-1",
         "2600000",
@@ -76,7 +76,7 @@
     },
     {
       "Name": "CPUBigClusterMinFreq",
-      "Path": "/proc/ppm/policy/cluster_1_min_freq",
+      "Path": "/sys/devices/system/cpu/cpufreq/policy6/scaling_min_freq",
       "Values": [
         "2600000",
         "2400000",
