@@ -127,7 +127,7 @@ on enable-low-power
     # top-app
     write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
     write /dev/cpuctl/top-app/cpu.uclamp.max max
-    write /dev/cpuctl/top-app/cpu.uclamp.min 0
+    write /dev/cpuctl/top-app/cpu.uclamp.min 10
     write /dev/cpuctl/top-app/cpu.shares 20480
 
     # nnapi-hal
