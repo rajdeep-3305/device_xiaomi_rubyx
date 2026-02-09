@@ -14,3 +14,7 @@ allow hal_power_default sysfs_ged:file w_file_perms;
 
 # To access display idle state
 allow hal_power_default vendor_sysfs_display:file r_file_perms;
+
+# FPSGO
+allow hal_power_default sysfs_fpsgo:dir r_dir_perms;
+allow hal_power_default sysfs_fpsgo:file rw_file_perms;
