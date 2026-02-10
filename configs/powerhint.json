@@ -137,6 +137,8 @@
       "Path": "/sys/kernel/ged/hal/gpu_boost_level",
       "Values": [
         "100",
+        "80",
+        "60",
         "50",
         "30",
         "0",
@@ -150,6 +152,7 @@
       "Path": "/dev/cpuctl/foreground/cpu.uclamp.min",
       "Values": [
         "100",
+        "60",
         "50",
         "30",
         "15",
@@ -163,6 +166,8 @@
       "Values": [
         "100",
         "90",
+        "80",
+        "70",
         "60",
         "50",
         "40",
@@ -240,55 +245,55 @@
     {
       "PowerHint": "INTERACTION",
       "Node": "CPULittleClusterMaxFreq",
-      "Duration": 1000,
+      "Duration": 800,
       "Value": "-1"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPULittleClusterMinFreq",
-      "Duration": 1000,
-      "Value": "1503000"
+      "Duration": 800,
+      "Value": "1703000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBigClusterMaxFreq",
-      "Duration": 1000,
+      "Duration": 800,
       "Value": "-1"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBigClusterMinFreq",
-      "Duration": 1000,
-      "Value": "1800000"
+      "Duration": 800,
+      "Value": "2000000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "TAUclampMin",
       "Duration": 800,
-      "Value": "50"
+      "Value": "60"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "FGUclampMin",
-      "Duration": 1000,
+      "Duration": 800,
       "Value": "30"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "DRAMOppMin",
-      "Duration": 1000,
+      "Duration": 800,
       "Value": "1"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "GPUBlockBoost",
-      "Duration": 1000,
-      "Value": "30"
+      "Duration": 800,
+      "Value": "60"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "GPUSchedMode",
-      "Duration": 1000,
+      "Duration": 800,
       "Value": "1"
     },
     {
@@ -300,50 +305,50 @@
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBigClusterMaxFreq",
-      "Duration": 3000,
+      "Duration": 2000,
       "Value": "-1"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBigClusterMinFreq",
-      "Duration": 3000,
-      "Value": "2600000"
+      "Duration": 2000,
+      "Value": "2275000"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPULittleClusterMaxFreq",
-      "Duration": 3000,
+      "Duration": 2000,
       "Value": "-1"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPULittleClusterMinFreq",
-      "Duration": 3000,
-      "Value": "2000000"
+      "Duration": 2000,
+      "Value": "1703000"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "FGUclampMin",
-      "Duration": 3000,
-      "Value": "100"
+      "Duration": 2000,
+      "Value": "60"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "TAUclampMin",
-      "Duration": 3000,
-      "Value": "100"
+      "Duration": 2000,
+      "Value": "80"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "DRAMOppMin",
-      "Duration": 3000,
+      "Duration": 2000,
       "Value": "1"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "GPUBlockBoost",
-      "Duration": 3000,
-      "Value": "100"
+      "Duration": 2000,
+      "Value": "80"
     },
     {
       "PowerHint": "LAUNCH",
@@ -354,7 +359,7 @@
     {
       "PowerHint": "LAUNCH",
       "Node": "SchedBoost",
-      "Duration": 3000,
+      "Duration": 2000,
       "Value": "1"
     },
     {
@@ -385,25 +390,25 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "GPUSchedMode",
       "Duration": 0,
-      "Value": "0"
+      "Value": "1"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "GPUBlockBoost",
       "Duration": 0,
-      "Value": "100"
+      "Value": "60"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "CPUBigClusterMinFreq",
       "Duration": 0,
-      "Value": "2275000"
+      "Value": "2400000"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "CPULittleClusterMinFreq",
       "Duration": 0,
-      "Value": "1703000"
+      "Value": "1903000"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
@@ -415,7 +420,7 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "TAUclampMin",
       "Duration": 0,
-      "Value": "90"
+      "Value": "70"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
