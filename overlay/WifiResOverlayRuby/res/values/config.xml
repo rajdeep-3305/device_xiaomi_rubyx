@@ -77,4 +77,10 @@
     <!-- Integer thresholds for low network score, should be somewhat less than the entry thresholds -->
     <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_5GHz">-90</integer>
     <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_24GHz">-83</integer>
+
+    <!-- Boolean indicating whether to disable firmware roaming when the device goes into idle mode.
+         true: firmware roaming will be disabled when the device goes into idle mode, and then
+         re-activated when the device exits idle mode.
+         false: firmware roaming will not be affected. -->
+    <bool translatable="false" name="config_wifiDisableFirmwareRoamingInIdleMode">true</bool>
 </resources>
