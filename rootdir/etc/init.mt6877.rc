@@ -877,6 +877,7 @@ on boot
     write /proc/sys/kernel/sched_latency_ns 6000000
     write /proc/sys/kernel/sched_min_granularity_ns 750000
     write /proc/sys/kernel/sched_wakeup_granularity_ns 150000
+    write /proc/sys/kernel/sched_util_clamp_min 10
 
     # memory reserve tuning
     write /proc/sys/vm/min_free_kbytes 27386
