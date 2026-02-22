@@ -301,10 +301,6 @@ vendor/lib64/libbluetooth_mtk.so|6a683fae698978e5c1c768987acf6face7726702
 vendor/lib64/libbluetooth_mtk_pure.so|8307ba5198af81ca60b444a64247ba2c9ae70a2f
 vendor/lib64/libbt-vendor.so|ea61e24a2884b192fc5641c07ae5a460ea1c59ce
 
-# Bluetooth (A2DP)
-vendor/lib/vendor.mediatek.hardware.bluetooth.audio@2.1.so|20ef5f6067294cc444778d09ed24a537b51a9124
-vendor/lib/vendor.mediatek.hardware.bluetooth.audio@2.2.so|6a5741b13f3c712a865e0203c5221171d2723e75
-
 # Bluetooth (Firmware)
 vendor/firmware/soc5_0_ram_bt_1_1_hdr.bin|fef42a21244a82358a0d9c388bb4796581539e15
 
