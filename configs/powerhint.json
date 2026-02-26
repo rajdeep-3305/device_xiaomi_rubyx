@@ -234,43 +234,43 @@
       "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
       "Node": "CPULittleClusterMinFreq",
       "Duration": 0,
-      "Value": "900000"
+      "Value": "1503000"
     },
     {
       "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
       "Node": "CPUBigClusterMinFreq",
       "Duration": 0,
-      "Value": "910000"
+      "Value": "1040000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPULittleClusterMaxFreq",
       "Duration": 800,
-      "Value": "-1"
+      "Value": "2000000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPULittleClusterMinFreq",
       "Duration": 800,
-      "Value": "1703000"
+      "Value": "1150000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBigClusterMaxFreq",
       "Duration": 800,
-      "Value": "-1"
+      "Value": "2600000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBigClusterMinFreq",
       "Duration": 800,
-      "Value": "2000000"
+      "Value": "1140000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "TAUclampMin",
       "Duration": 800,
-      "Value": "60"
+      "Value": "40"
     },
     {
       "PowerHint": "INTERACTION",
@@ -312,7 +312,7 @@
       "PowerHint": "LAUNCH",
       "Node": "CPUBigClusterMinFreq",
       "Duration": 2000,
-      "Value": "2275000"
+      "Value": "2600000"
     },
     {
       "PowerHint": "LAUNCH",
@@ -324,7 +324,7 @@
       "PowerHint": "LAUNCH",
       "Node": "CPULittleClusterMinFreq",
       "Duration": 2000,
-      "Value": "1703000"
+      "Value": "2000000"
     },
     {
       "PowerHint": "LAUNCH",
@@ -336,7 +336,7 @@
       "PowerHint": "LAUNCH",
       "Node": "TAUclampMin",
       "Duration": 2000,
-      "Value": "80"
+      "Value": "100"
     },
     {
       "PowerHint": "LAUNCH",
