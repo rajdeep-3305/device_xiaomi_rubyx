@@ -1,0 +1,2 @@
+# Allow init to ptrace the fingerprint HAL
+allow init hal_fingerprint_default:process ptrace;
