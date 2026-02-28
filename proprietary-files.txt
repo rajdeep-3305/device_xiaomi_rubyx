@@ -1574,10 +1574,6 @@ vendor/lib64/vendor.mediatek.hardware.mtkradioex@3.0.so|12a434e85963fd7f8e295c6d
 vendor/etc/apdb/APDB_MT6853_S01__W2302|a1f3c39a256d058bf02ea7f7988c2cdfd5bccc54
 vendor/etc/apdb/APDB_MT6853_S01__W2302_ENUM|c9af517c20f456fdddded823650e3e8f948f21d7
 
-# Radio (APDB)
-vendor/etc/apdb/APDB_MT6853_S01__W2302|a1f3c39a256d058bf02ea7f7988c2cdfd5bccc54
-vendor/etc/apdb/APDB_MT6853_S01__W2302_ENUM|c9af517c20f456fdddded823650e3e8f948f21d7
-
 # Radio (mdota)
 vendor/etc/mdota/MTK_MD_OTA_CONFIG.ini|7f73f913099708960e8fa90d3919d7a6d8acd886
 vendor/etc/mdota/MTK_OPOTA_GENERAL.mcfopota|099d95b116a3e14d62d7b205da06de5c70e1a8e8
