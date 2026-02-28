@@ -39,10 +39,6 @@ on init
     write /dev/cpuset/restricted/cpus 0-3
     write /dev/cpuset/camera-daemon/cpus 0-7
 
-    # Dex2Oat Tuning
-    setprop dalvik.vm.dex2oat-cpu-set 0,1,2,3,4,5,6
-    setprop dalvik.vm.dex2oat-threads 6
-
     # Disable Kernel Logging
     write /proc/sys/kernel/printk_devkmsg off
 
