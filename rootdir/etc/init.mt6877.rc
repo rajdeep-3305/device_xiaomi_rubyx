@@ -868,6 +868,14 @@ on boot
     chmod 0664 /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/policy6/scaling_min_freq
+
+    # Allow Power HAL to control Mali GPU scheduling and dvfs
+    chown system system /sys/devices/platform/13000000.mali/js_ctx_scheduling_mode
+    chmod 0664 /sys/devices/platform/13000000.mali/js_ctx_scheduling_mode
+    chown system system /sys/devices/platform/13000000.mali/js_scheduling_period
+    chmod 0664 /sys/devices/platform/13000000.mali/js_scheduling_period
+    chown system system /sys/devices/platform/13000000.mali/dvfs_period
+    chmod 0664 /sys/devices/platform/13000000.mali/dvfs_period
   
     # Adjust watermark level
     write /proc/sys/vm/watermark_scale_factor 200
