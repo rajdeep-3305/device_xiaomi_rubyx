@@ -301,8 +301,8 @@ vendor/lib64/libbluetooth_mtk.so
 vendor/lib64/libbluetooth_mtk_pure.so
 vendor/lib64/libbt-vendor.so
 
-# Bluetooth (Firmware)
-vendor/firmware/soc5_0_ram_bt_1_1_hdr.bin
+# Bluetooth (Firmware) [from a34xdxx-user-15-AP3A.240905.015.A2-A346EXXU9DYF4-release-keys]
+vendor/firmware/soc5_0_ram_bt_1_1_hdr.bin|f205a94e0741685247ec104d314d4edc5375e0e1
 
 # Camera
 vendor/bin/hw/camerahalserver
@@ -1199,9 +1199,9 @@ vendor/firmware/txpowerctrl_gl_u.cfg
 vendor/firmware/txpowerctrl_in.cfg
 vendor/firmware/txpowerctrl_in_u.cfg
 
-# Connectivity (Firmware)
-vendor/firmware/soc5_0_ram_mcu_1_1_hdr.bin
-vendor/firmware/soc5_0_ram_wmmcu_1_1_hdr.bin
+# Connectivity (Firmware) [from a34xdxx-user-15-AP3A.240905.015.A2-A346EXXU9DYF4-release-keys]
+vendor/firmware/soc5_0_ram_mcu_1_1_hdr.bin|55f6216ffb4327b30b1a2cca8a46f92bc1ee2f8e
+vendor/firmware/soc5_0_ram_wmmcu_1_1_hdr.bin|38a9d090ee59efddba8fb816a07039ff489ab3b8
 
 # ConsumerIr
 vendor/lib64/hw/consumerir.common.so
@@ -2001,5 +2001,5 @@ vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
 # Wi-Fi (Config)
 vendor/firmware/wifi.cfg
 
-# Wi-Fi (Firmware)
-vendor/firmware/WIFI_RAM_CODE_soc5_0_1_1.bin
+# Wi-Fi (Firmware) [from a34xdxx-user-15-AP3A.240905.015.A2-A346EXXU9DYF4-release-keys]
+vendor/firmware/WIFI_RAM_CODE_soc5_0_1_1.bin|88e00e6272b01d5cfa4036953f5fc8f22e69ddba
