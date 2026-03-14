@@ -156,11 +156,6 @@ ro.vendor.smvr.p2batch.vga=16
 debug.hwui.skia_tracing_enabled=false
 debug.hwui.skia_use_perfetto_track_events=false
 
-# Dolby
-ro.vendor.audio.device.dbcom=dolby_common
-ro.vendor.audio.dolby.dax.support=true
-ro.vendor.dolby.dax.version=DAX3_3.6.0.12_r1
-
 # DRM
 ro.netflix.bsp_rev=MTK6877-33678-1
 

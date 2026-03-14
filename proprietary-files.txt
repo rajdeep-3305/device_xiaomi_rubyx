@@ -1278,24 +1278,6 @@ vendor/etc/cust_color_dsi_m16_36_02_0b_dsc_vdo.xml
 vendor/etc/cust_color_dsi_m16_42_0d_0a_dsc_vdo.xml
 vendor/etc/cust_color_dsi_m16_45_02_0c_dsc_vdo.xml
 
-# Dolby
--vendor/etc/vintf/manifest/manifest_vendor.dolby.hardware.dms.xml
-vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service
-vendor/etc/dolby/dax-default.xml
-vendor/etc/dolby/dax-rubypro.xml
-vendor/etc/init/vendor.dolby.hardware.dms@2.0-service.rc
-vendor/lib/libdapparamstorage.so
-vendor/lib/libdeccfg.so
-vendor/lib/soundfx/libswdap.so
-vendor/lib/vendor.dolby.hardware.dms@2.0.so
-vendor/lib64/libdapparamstorage.so
-vendor/lib64/libdeccfg.so
-vendor/lib64/libdlbdsservice.so
-vendor/lib64/soundfx/libswgamedap.so
-vendor/lib64/soundfx/libswvqe.so
-vendor/lib64/vendor.dolby.hardware.dms@2.0-impl.so
-vendor/lib64/vendor.dolby.hardware.dms@2.0.so
-
 # DRM
 -vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.4-service.widevine.xml
 vendor/bin/hw/android.hardware.drm@1.4-service.widevine
@@ -1419,9 +1401,6 @@ vendor/lib64/libcodec2_soft_mtk_apedec.so
 vendor/lib64/libcodec2_soft_mtk_imaadpcmdec.so
 vendor/lib64/libcodec2_soft_mtk_mp3dec.so
 vendor/lib64/libcodec2_soft_mtk_msadpcmdec.so
-vendor/lib64/libcodec2_vpp_dolby_plugin.so
-vendor/lib64/libdolbyottcameracontrol.so
-vendor/lib64/libdolbyplugin.so
 vendor/lib64/libfiltersimulation.so
 vendor/lib64/libformatter.so
 vendor/lib64/libpowerhalwrap_vendor.so

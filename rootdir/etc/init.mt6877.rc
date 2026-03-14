@@ -631,9 +631,6 @@ on post-fs-data
     chmod 0664 sys/kernel/debug/ext_dev_io/MT6362.0-09/reg
     chmod 0664 sys/kernel/debug/ext_dev_io/MT6362.0-09/size
 
-    #Create dir for dolby
-    mkdir /data/vendor/dolby 0770 media media
-
 on boot
     chmod 0660 /sys/power/autosleep
 
