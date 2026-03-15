@@ -55,7 +55,7 @@ blob_fixups: blob_fixups_user_type = {
     
     'vendor/etc/vintf/manifest/manifest_media_c2_V1_2_default.xml': blob_fixup()
         .regex_replace('1.1', '1.2')
-        .regex_replace('.+dolby.+\n', ''),
+        .regex_replace(r'(?m)^.*(dolby|dts).*$\n?', ''),
     
     ('vendor/bin/mnld',
      'vendor/lib/libaalservice.so',
@@ -115,6 +115,10 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/libmtkcam_grallocutils.so',
      'vendor/lib64/libmtkcam_3rdparty.vidhance.so'): blob_fixup()
         .replace_needed('libui.so', 'libui-v34.so'),
+
+    ('vendor/lib64/libcodec2_mtk_vdec.so',
+     'vendor/lib64/libcodec2_mtk_venc.so'): blob_fixup()
+        .remove_needed('libcodec2_vpp_dolby_plugin.so')
 }
 
 module = ExtractUtilsModule(
