@@ -1,0 +1,9 @@
+{
+    "device": null,
+    "devices": null,
+    "has_device_suffix": false,
+    "original_device": null,
+    "original_name": "SettingsProviderOverlayRubyProPlus",
+    "original_package": "com.android.settingsprovider.overlay.rubyproplus",
+    "original_target_package": "com.android.providers.settings"
+}

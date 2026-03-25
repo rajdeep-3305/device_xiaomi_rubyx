@@ -1,25 +1,20 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
-    SPDX-FileCopyrightText: 2023-2025 The LineageOS Project
-  SPDX-License-Identifier: Apache-2.0
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
 -->
-
-<!-- These resources are around just to allow their values to be customized
-     for different hardware and product builds.  Do not translate.
-
-     NOTE: The naming convention is "config_camelCaseValue". Some legacy
-     entries do not follow the convention, but all new entries should. -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources>
     <!-- Doze: does this device support STATE_DOZE?  -->
     <bool name="doze_display_state_supported">true</bool>
 
     <!-- Type of a sensor that provides a low-power estimate of the desired display
          brightness, suitable to listen to while the device is asleep (e.g. during
          always-on display) -->
-    <string name="doze_brightness_sensor_type" translatable="false">xiaomi.sensor.aod</string>
+    <string name="doze_brightness_sensor_type">xiaomi.sensor.aod</string>
 
     <!-- Doze: Table that translates sensor values from the doze_brightness_sensor_type sensor
-               to brightness values; -1 means keeping the current brightness. -->
+               to brightness values in the integer scale [1, 255]; -1 means keeping the current
+               brightness. -->
     <integer-array name="config_doze_brightness_sensor_to_brightness">
         <item>-1</item>    <!-- 0.0: Never used -->
         <item>-1</item>    <!-- 1.0: Never used -->
@@ -42,50 +37,6 @@
         <item>0</item>
     </integer-array>
 
-    <!-- Location on the screen of the center of the fingerprint sensor. For devices with under
-     display fingerprint sensors, this directly corresponds to the fingerprint sensor's location.
-     For devices with sensors on the back of the device, this corresponds to the location on the
-     screen directly in front of the sensor.
-     By default, this is set to @null to use the horizontal center of the screen. -->
-    <dimen name="physical_fingerprint_sensor_center_screen_location_x">1080px</dimen>
-
-    <!-- Location on the screen of the center of the fingerprint sensor. For devices with under
-     display fingerprint sensors, this directly corresponds to the fingerprint sensor's location.
-     For devices with sensors on the back of the device, this corresponds to the location on the
-     screen directly in front of the sensor. -->
-    <dimen name="physical_fingerprint_sensor_center_screen_location_y">@dimen/physical_power_button_center_screen_location_y</dimen>
-
-    <!-- Location on the screen of the center of the physical power button. This is a reasonable
-    default that should be overridden by device-specific overlays. -->
-    <dimen name="physical_power_button_center_screen_location_y">1060px</dimen>
-
     <!-- Preferred max refresh rate at keyguard, if supported by the display. -->
     <integer name="config_keyguardMaxRefreshRate">120</integer>
-
-    <!-- Adjust the icon padding in status bar for rounded corners. -->
-    <dimen name="rounded_corner_content_padding">47.0px</dimen>
-
-    <!-- the padding on the top of the statusbar (usually 0) -->
-    <dimen name="status_bar_padding_top">14.0px</dimen>
-
-    <!-- Margin on the left side of the carrier text on Keyguard -->
-    <dimen name="keyguard_carrier_text_margin">76.0px</dimen>
-
-    <!-- Height of the status bar header bar when on Keyguard -->
-    <dimen name="status_bar_header_height_keyguard">94.0px</dimen>
-
-    <!-- If not zero, limits the internal screen recorder's framerate to the set value. -->
-    <integer name="config_screenRecorderMaxFramerate">120</integer>
-
-    <!-- Determines whether the shell features all run on another thread. -->
-    <bool name="config_enableShellMainThread">true</bool>
-    
-    <!-- Whether to enable shifting of elements in the status bar and the navigation bar.
-    Should be enabled for OLED devices to reduce/prevent burn in on the status bar
-    and on the navigation bar and disabled for all other devices. -->
-    <bool name="config_statusBarBurnInProtection">true</bool>
-    
-    <!-- Whether to play turbulence noise after clicking the play button -->
-    <bool name="config_turbulenceNoise">false</bool>
-   
 </resources>
