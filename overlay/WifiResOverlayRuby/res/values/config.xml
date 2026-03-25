@@ -4,10 +4,6 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <!-- Whether we should apply APF filters on non primary STA connections when STA + STA is active.
-         Defaults to false since most wifi chips cannot support concurrent APF filter set needed for STA + STA-->
-    <bool translatable="false" name="config_wifiEnableApfOnNonPrimarySta">true</bool>
-
     <!-- boolean indicating whether the WiFi chipset has 5GHz band support.
          Note: This config is replacing the config_wifi_dual_band_support
          since more bands may now be supported (such as 6GHz), the naming dual_band
@@ -63,6 +59,10 @@
 
     <!-- integer indicating additional disconnect delay (in ms) after IMS onLost() indication is received -->
     <integer name="config_wifiDelayDisconnectOnImsLostMs">10</integer>
+
+    <!-- Whether we should apply APF filters on non primary STA connections when STA + STA is active.
+         Defaults to false since most wifi chips cannot support concurrent APF filter set needed for STA + STA-->
+    <bool name="config_wifiEnableApfOnNonPrimarySta">true</bool>
 
     <!-- Indicates that SAE Hash-to-Element is supported on this device -->
     <bool name="config_wifiSaeH2eSupported">true</bool>
