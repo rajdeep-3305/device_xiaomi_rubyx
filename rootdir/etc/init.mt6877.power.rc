@@ -29,6 +29,8 @@ on init
     write /sys/block/sda/queue/iostats 0
     write /sys/block/sdb/queue/iostats 0
     write /sys/block/sdc/queue/iostats 0
+    write /sys/block/sda/queue/nr_requests 256
+    write /sys/block/sdb/queue/nr_requests 256
     write /sys/block/sdc/queue/nr_requests 256
 
     # update cpus for cpuset cgroup
@@ -63,6 +65,8 @@ on enable-low-power
     # we should adjust the setting upon boot_complete for runtime performance
     write /sys/block/mmcblk0/queue/read_ahead_kb 512
     write /sys/block/mmcblk0/queue/nr_requests 64
+    write /sys/block/sda/queue/read_ahead_kb 512
+    write /sys/block/sdb/queue/read_ahead_kb 512
     write /sys/block/sdc/queue/read_ahead_kb 512
     write /sys/block/sda/queue/nr_requests 64
     write /sys/block/sdb/queue/nr_requests 64
