@@ -1,0 +1,355 @@
+From a96010c7d3dd63972ceb7257de4446bdb5788e40 Mon Sep 17 00:00:00 2001
+From: claxten10 <claxten10@gmail.com>
+Date: Thu, 20 Nov 2025 01:09:08 +0000
+Subject: [PATCH] Revert "stagefright: distinguish HAL name from name in
+ MediaCodecInfo"
+
+* Resolves C2 crashes on MediaTek devices after Android 16 release.
+
+This reverts commit c996a72341de09f0bf18fea5c64620077f4e4648.
+
+Change-Id: I58fb4c18d3a2d20d3acadd75ca75c5020f9a2294
+Signed-off-by: claxten10 <claxten10@gmail.com>
+Signed-off-by: rajdeep-3305 <rajdeepbiswas3305@gmail.com>
+---
+ cmds/stagefright/stagefright.cpp              |  3 +-
+ media/codec2/sfplugin/CCodec.cpp              |  9 ++--
+ media/libmedia/MediaCodecInfo.cpp             | 29 -----------
+ media/libmedia/include/media/MediaCodecInfo.h | 26 ++--------
+ .../MediaPlayerService.cpp                    |  4 +-
+ media/libstagefright/ACodec.cpp               | 11 ++---
+ media/libstagefright/MediaCodecListWriter.cpp | 49 +------------------
+ .../media/stagefright/foundation/AString.h    |  3 --
+ 8 files changed, 14 insertions(+), 120 deletions(-)
+
+diff --git a/cmds/stagefright/stagefright.cpp b/cmds/stagefright/stagefright.cpp
+index f2758f8df0b..0a53456d3aa 100644
+--- a/cmds/stagefright/stagefright.cpp
++++ b/cmds/stagefright/stagefright.cpp
+@@ -737,10 +737,9 @@ static void dumpCodecDetails(bool queryDecoders) {
+                 }
+ 
+                 printf("    owner: \"%s\"\n", info->getOwnerName());
+-                printf("    hal name: \"%s\"\n", info->getHalName());
+                 printf("    rank: %u\n", info->getRank());
+             } else {
+-                printf("    aliases, attributes, owner, hal name, rank: see above\n");
++                printf("    aliases, attributes, owner, rank: see above\n");
+             }
+ 
+             {
+diff --git a/media/codec2/sfplugin/CCodec.cpp b/media/codec2/sfplugin/CCodec.cpp
+index 99f0f53b9a1..5578eadfdba 100644
+--- a/media/codec2/sfplugin/CCodec.cpp
++++ b/media/codec2/sfplugin/CCodec.cpp
+@@ -1043,12 +1043,11 @@ void CCodec::allocate(const sp<MediaCodecInfo> &codecInfo) {
+         mCallback->onError(UNKNOWN_ERROR, ACTION_CODE_FATAL);
+         return;
+     }
++    ALOGD("allocate(%s)", codecInfo->getCodecName());
+     mClientListener.reset(new ClientListener(this));
+ 
+     AString componentName = codecInfo->getCodecName();
+-    AString halName = codecInfo->getHalName();
+     std::shared_ptr<Codec2Client> client;
+-    ALOGD("allocate(%s)", componentName.c_str());
+ 
+     // set up preferred component store to access vendor store parameters
+     client = Codec2Client::CreateFromService("default");
+@@ -1060,12 +1059,12 @@ void CCodec::allocate(const sp<MediaCodecInfo> &codecInfo) {
+ 
+     std::shared_ptr<Codec2Client::Component> comp;
+     c2_status_t status = Codec2Client::CreateComponentByName(
+-            halName.c_str(),
++            componentName.c_str(),
+             mClientListener,
+             &comp,
+             &client);
+     if (status != C2_OK) {
+-        ALOGE("Failed Create component: %s, error=%d", halName.c_str(), status);
++        ALOGE("Failed Create component: %s, error=%d", componentName.c_str(), status);
+         Mutexed<State>::Locked state(mState);
+         state->set(RELEASED);
+         state.unlock();
+@@ -1073,7 +1072,7 @@ void CCodec::allocate(const sp<MediaCodecInfo> &codecInfo) {
+         state.lock();
+         return;
+     }
+-    ALOGI("Created component [%s] for [%s]", halName.c_str(), componentName.c_str());
++    ALOGI("Created component [%s]", componentName.c_str());
+     mChannel->setComponent(comp);
+     auto setAllocated = [this, comp, client] {
+         Mutexed<State>::Locked state(mState);
+diff --git a/media/libmedia/MediaCodecInfo.cpp b/media/libmedia/MediaCodecInfo.cpp
+index db83a426f5a..38342784bc0 100644
+--- a/media/libmedia/MediaCodecInfo.cpp
++++ b/media/libmedia/MediaCodecInfo.cpp
+@@ -22,7 +22,6 @@
+ 
+ #include <media/stagefright/foundation/ADebug.h>
+ #include <media/stagefright/foundation/AMessage.h>
+-#include "media/stagefright/foundation/AString.h"
+ #include <binder/Parcel.h>
+ 
+ namespace android {
+@@ -186,10 +185,6 @@ const char *MediaCodecInfo::getCodecName() const {
+     return mName.c_str();
+ }
+ 
+-const char *MediaCodecInfo::getHalName() const {
+-    return mHalName.c_str();
+-}
+-
+ const char *MediaCodecInfo::getOwnerName() const {
+     return mOwner.c_str();
+ }
+@@ -198,13 +193,11 @@ const char *MediaCodecInfo::getOwnerName() const {
+ sp<MediaCodecInfo> MediaCodecInfo::FromParcel(const Parcel &parcel) {
+     sMaxSupportedInstances = parcel.readInt32();
+     AString name = AString::FromParcel(parcel);
+-    AString halName = AString::FromParcel(parcel);
+     AString owner = AString::FromParcel(parcel);
+     Attributes attributes = static_cast<Attributes>(parcel.readInt32());
+     uint32_t rank = parcel.readUint32();
+     sp<MediaCodecInfo> info = new MediaCodecInfo;
+     info->mName = name;
+-    info->mHalName = halName;
+     info->mOwner = owner;
+     info->mAttributes = attributes;
+     info->mRank = rank;
+@@ -233,7 +226,6 @@ sp<MediaCodecInfo> MediaCodecInfo::FromParcel(const Parcel &parcel) {
+ status_t MediaCodecInfo::writeToParcel(Parcel *parcel) const {
+     parcel->writeInt32(sMaxSupportedInstances);
+     mName.writeToParcel(parcel);
+-    mHalName.writeToParcel(parcel);
+     mOwner.writeToParcel(parcel);
+     parcel->writeInt32(mAttributes);
+     parcel->writeUint32(mRank);
+@@ -286,9 +278,6 @@ MediaCodecInfo::MediaCodecInfo()
+ 
+ void MediaCodecInfoWriter::setName(const char* name) {
+     mInfo->mName = name;
+-    // Upon creation, we use the same name for HAL and info and
+-    // only distinguish them during collision resolution.
+-    mInfo->mHalName = name;
+ }
+ 
+ void MediaCodecInfoWriter::addAlias(const char* name) {
+@@ -342,24 +331,6 @@ void MediaCodecInfoWriter::createCodecCaps() {
+     }
+ }
+ 
+-sp<MediaCodecInfo> MediaCodecInfo::splitOutType(const char *mediaType,
+-        const char *newName) const {
+-    sp<MediaCodecInfo> newInfo = new MediaCodecInfo;
+-    newInfo->mName = newName;
+-    newInfo->mHalName = mHalName;
+-    newInfo->mOwner = mOwner;
+-    newInfo->mAttributes = mAttributes;
+-    newInfo->mRank = mRank;
+-    newInfo->mAliases = mAliases;
+-    // allow an alias from the (old) HAL name. If there is a collision, this will be ignored.
+-    newInfo->mAliases.add(mHalName);
+-
+-    // note: mediaType is always a supported type. valueAt() will abort otherwise.
+-    newInfo->mCaps.add(AString(mediaType), mCaps.valueAt(getCapabilityIndex(mediaType)));
+-    newInfo->mCodecCaps.add(AString(mediaType), mCodecCaps.valueAt(getCodecCapIndex(mediaType)));
+-    return newInfo;
+-}
+-
+ // static
+ std::shared_ptr<CodecCapabilities> MediaCodecInfoWriter::BuildCodecCapabilities(
+         const char *mediaType, sp<MediaCodecInfo::Capabilities> caps, bool isEncoder,
+diff --git a/media/libmedia/include/media/MediaCodecInfo.h b/media/libmedia/include/media/MediaCodecInfo.h
+index 4d74a676079..60e383ae8ce 100644
+--- a/media/libmedia/include/media/MediaCodecInfo.h
++++ b/media/libmedia/include/media/MediaCodecInfo.h
+@@ -193,11 +193,7 @@ struct MediaCodecInfo : public RefBase {
+     void getSupportedMediaTypes(Vector<AString> *mediaTypes) const;
+     const sp<Capabilities> getCapabilitiesFor(const char *mediaType) const;
+     const std::shared_ptr<CodecCapabilities> getCodecCapsFor(const char *mediaType) const;
+-
+-    /// returns the codec name used by this info
+     const char *getCodecName() const;
+-    /// returns the codec name as used by the HAL
+-    const char *getHalName() const;
+ 
+     /**
+      * Returns a vector containing alternate names for the codec.
+@@ -233,24 +229,14 @@ struct MediaCodecInfo : public RefBase {
+     static sp<MediaCodecInfo> FromParcel(const Parcel &parcel);
+     status_t writeToParcel(Parcel *parcel) const;
+ 
+-    /**
+-     * Create a copy of this MediaCodecInfo supporting a single media type.
+-     *
+-     * \param mediaType the media type for the new MediaCodecInfo. This must be
+-     *                  one of the media types supported by this MediaCodecInfo.
+-     * \param newName the new codec name for the new MediaCodecInfo.
+-     */
+-    sp<MediaCodecInfo> splitOutType(const char *mediaType, const char *newName) const;
+-
+ private:
+     /**
+      * Max supported instances setting from MediaCodecList global setting.
+      */
+     static int32_t sMaxSupportedInstances;
+ 
+-    AString mName;     // codec name for this info
+-    AString mHalName;  // codec name at the HAL level
+-    AString mOwner;    // owning HAL name
++    AString mName;
++    AString mOwner;
+     Attributes mAttributes;
+     KeyedVector<AString, sp<Capabilities> > mCaps;
+     KeyedVector<AString, std::shared_ptr<CodecCapabilities>> mCodecCaps;
+@@ -297,13 +283,7 @@ struct MediaCodecInfoWriter {
+     /**
+      * Set the name of the codec.
+      *
+-     * This sets both the name used internally and the HAL name, as during
+-     * creation, they are the same. A new internal name will only be created
+-     * during name collision resolution while splitting out media types.
+-     *
+-     * @param name The new name (from XML).
+-     *
+-     * @see MediaCodecInfo::splitOutType
++     * @param name The new name.
+      */
+     void setName(const char* name);
+     /**
+diff --git a/media/libmediaplayerservice/MediaPlayerService.cpp b/media/libmediaplayerservice/MediaPlayerService.cpp
+index b1d293f1d04..0eaa271f178 100644
+--- a/media/libmediaplayerservice/MediaPlayerService.cpp
++++ b/media/libmediaplayerservice/MediaPlayerService.cpp
+@@ -361,12 +361,10 @@ static void dumpCodecDetails(int fd, const sp<IMediaCodecList> &codecList, bool
+ 
+                 snprintf(buffer, SIZE - 1, "    owner: \"%s\"\n", info->getOwnerName());
+                 result.append(buffer);
+-                snprintf(buffer, SIZE - 1, "    hal name: \"%s\"\n", info->getHalName());
+-                result.append(buffer);
+                 snprintf(buffer, SIZE - 1, "    rank: %u\n", info->getRank());
+                 result.append(buffer);
+             } else {
+-                result.append("    aliases, attributes, owner, hal name, rank: see above\n");
++                result.append("    aliases, attributes, owner, rank: see above\n");
+             }
+ 
+             {
+diff --git a/media/libstagefright/ACodec.cpp b/media/libstagefright/ACodec.cpp
+index bacf7581ab3..e06efac6df2 100644
+--- a/media/libstagefright/ACodec.cpp
++++ b/media/libstagefright/ACodec.cpp
+@@ -7084,10 +7084,8 @@ bool ACodec::UninitializedState::onAllocateComponent(const sp<AMessage> &msg) {
+     }
+     AString owner = (info->getOwnerName() == nullptr) ? "default" : info->getOwnerName();
+ 
+-    AString componentName = info->getCodecName();
+-    // we are no longer using "componentName" as we always pass the codec info for owner.
+-    // CHECK(msg->findString("componentName", &componentName));
+-    AString halName = info->getHalName();
++    AString componentName;
++    CHECK(msg->findString("componentName", &componentName));
+ 
+     sp<CodecObserver> observer = new CodecObserver(notify);
+     sp<IOMX> omx;
+@@ -7104,12 +7102,11 @@ bool ACodec::UninitializedState::onAllocateComponent(const sp<AMessage> &msg) {
+     pid_t tid = gettid();
+     int prevPriority = androidGetThreadPriority(tid);
+     androidSetThreadPriority(tid, ANDROID_PRIORITY_FOREGROUND);
+-    err = omx->allocateNode(halName.c_str(), observer, &omxNode);
++    err = omx->allocateNode(componentName.c_str(), observer, &omxNode);
+     androidSetThreadPriority(tid, prevPriority);
+ 
+     if (err != OK) {
+-        ALOGE("Unable to instantiate codec '%s' for '%s' with err %#x.",
+-                halName.c_str(), componentName.c_str(), err);
++        ALOGE("Unable to instantiate codec '%s' with err %#x.", componentName.c_str(), err);
+ 
+         mCodec->signalError((OMX_ERRORTYPE)err, makeNoSideEffectStatus(err));
+         return false;
+diff --git a/media/libstagefright/MediaCodecListWriter.cpp b/media/libstagefright/MediaCodecListWriter.cpp
+index 2048f3be7e0..c4fb19946df 100644
+--- a/media/libstagefright/MediaCodecListWriter.cpp
++++ b/media/libstagefright/MediaCodecListWriter.cpp
+@@ -19,12 +19,9 @@
+ #include <utils/Log.h>
+ 
+ #include <media/stagefright/foundation/AMessage.h>
+-#include "media/stagefright/foundation/AString.h"
+ #include <media/stagefright/MediaCodecListWriter.h>
+ #include <media/MediaCodecInfo.h>
+ 
+-#include <string>
+-
+ namespace android {
+ 
+ void MediaCodecListWriter::addGlobalSetting(
+@@ -59,52 +56,8 @@ void MediaCodecListWriter::writeGlobalSettings(
+ 
+ void MediaCodecListWriter::writeCodecInfos(
+         std::vector<sp<MediaCodecInfo>> *codecInfos) const {
+-    // Since the introduction of the NDK MediaCodecList API, each
+-    // MediaCodecInfo object can only support a single media type, so infos that
+-    // support multiple media types are split into multiple infos.
+-    // This process may result in name collisions that are handled here.
+-
+-    // Prefer codec names that already support a single media type
+-    // and also any existing aliases. If an alias matches an existing
+-    // codec name, it is ignored, which is the right behavior.
+-    std::set<std::string> reservedNames;
+-    for (const sp<MediaCodecInfo> &info : mCodecInfos) {
+-        Vector<AString> mediaTypes;
+-        info->getSupportedMediaTypes(&mediaTypes);
+-        if (mediaTypes.size() == 1) {
+-            reservedNames.insert(info->getCodecName());
+-        }
+-        Vector<AString> aliases;
+-        info->getAliases(&aliases);
+-        for (const AString &alias : aliases) {
+-            reservedNames.insert(alias.c_str());
+-        }
+-    }
+-
+     for (const sp<MediaCodecInfo> &info : mCodecInfos) {
+-        Vector<AString> mediaTypes;
+-        info->getSupportedMediaTypes(&mediaTypes);
+-        if (mediaTypes.size() == 1) {
+-            codecInfos->push_back(info);
+-        } else {
+-            // disambiguate each type
+-            for (const AString &mediaType : mediaTypes) {
+-                // get the type name after the first slash (if exists)
+-                ssize_t slashPosition = mediaType.find("/");
+-                const char *typeName = mediaType.c_str() + (slashPosition + 1);
+-
+-                // find a unique name for the split codec info starting with "<name>.<type>"
+-                AString newName = AStringPrintf("%s.%s", info->getCodecName(), typeName);
+-                std::string newNameStr = newName.c_str();
+-                // append increasing suffix of the form ".<number>" until a unique name is found
+-                for (size_t ix = 1; reservedNames.count(newNameStr) > 0; ++ix) {
+-                    newNameStr = AStringPrintf("%s.%zu", newName.c_str(), ix).c_str();
+-                }
+-
+-                codecInfos->push_back(info->splitOutType(mediaType.c_str(), newNameStr.c_str()));
+-                reservedNames.insert(newNameStr);
+-            }
+-        }
++        codecInfos->push_back(info);
+     }
+ }
+ 
+diff --git a/media/module/foundation/include/media/stagefright/foundation/AString.h b/media/module/foundation/include/media/stagefright/foundation/AString.h
+index 7ab6b7c93ef..517774b7627 100644
+--- a/media/module/foundation/include/media/stagefright/foundation/AString.h
++++ b/media/module/foundation/include/media/stagefright/foundation/AString.h
+@@ -67,9 +67,6 @@ struct AString {
+     void insert(const AString &from, size_t insertionPos);
+     void insert(const char *from, size_t size, size_t insertionPos);
+ 
+-    // Returns the index of the first occurrence of substring in the string, or -1 if not found.
+-    // If start is specified, the search is limited to the substring starting at that position.
+-    // The start parameter MUST NOT be greater than the string size.
+     ssize_t find(const char *substring, size_t start = 0) const;
+ 
+     size_t hash() const;
