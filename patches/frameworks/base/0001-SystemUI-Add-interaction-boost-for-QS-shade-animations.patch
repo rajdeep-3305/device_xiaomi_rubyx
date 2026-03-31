@@ -1,0 +1,153 @@
+From 914a47305e7f3b20c3d68e25e11f19a8304ddcc5 Mon Sep 17 00:00:00 2001
+From: Ghosuto <clash.raja10@gmail.com>
+Date: Mon, 9 Mar 2026 12:52:51 +0000
+Subject: [PATCH] SystemUI: Add interaction boost for QS/shade animations
+
+- based on https://github.com/AOSPA/android_frameworks_base/commit/dfef0f9bfa04a4acf44782e04ff9a1e183560409
+
+Uses PowerManagerInternal.setPowerBoost() via LocalServices,
+matching the approach used in DisplayPolicy for system gesture flings
+
+Goal - reduce jank and improve responsiveness
+
+Boost points:
+- onTrackingStarted: when finger drag begins
+- flingToHeight: when fling animator is committed
+- flingToHeight onAnimationEnd/Cancel: fling settle and interrupts
+- springBack onAnimationEnd: overshoot spring settle
+- maybeVibrateOnOpening: shade open start
+- onPanelTrackingStarted: open panel
+
+Co-authored-by: Jake Weinstein <jake@aospa.co>
+Signed-off-by: Ghosuto <clash.raja10@gmail.com>
+Signed-off-by: rajdeep-3305 <rajdeepbiswas3305@gmail.com>
+---
+ .../shade/NotificationPanelViewController.java  | 17 +++++++++++++++++
+ .../stack/NotificationStackScrollLayout.java    | 11 +++++++++++
+ 2 files changed, 28 insertions(+)
+
+diff --git a/packages/SystemUI/src/com/android/systemui/shade/NotificationPanelViewController.java b/packages/SystemUI/src/com/android/systemui/shade/NotificationPanelViewController.java
+index 7f4965936a0a1..ecd98c3d36ac4 100644
+--- a/packages/SystemUI/src/com/android/systemui/shade/NotificationPanelViewController.java
++++ b/packages/SystemUI/src/com/android/systemui/shade/NotificationPanelViewController.java
+@@ -63,10 +63,14 @@
+ import android.graphics.Region;
+ import android.graphics.RenderEffect;
+ import android.graphics.Shader;
++import android.graphics.drawable.Drawable;
++import android.graphics.drawable.TransitionDrawable;
++import android.hardware.power.Boost;
+ import android.os.Build;
+ import android.os.Bundle;
+ import android.os.Handler;
+ import android.os.PowerManager;
++import android.os.PowerManagerInternal;
+ import android.os.Trace;
+ import android.util.IndentingPrintWriter;
+ import android.util.Log;
+@@ -98,6 +102,7 @@
+ import com.android.keyguard.KeyguardUnfoldTransition;
+ import com.android.keyguard.KeyguardUpdateMonitor;
+ import com.android.keyguard.dagger.KeyguardStatusBarViewComponent;
++import com.android.server.LocalServices;
+ import com.android.systemui.DejankUtils;
+ import com.android.systemui.Dumpable;
+ import com.android.systemui.Flags;
+@@ -1530,6 +1535,7 @@ public void onAnimationEnd(Animator animation) {
+         }
+         setAnimator(animator);
+         animator.start();
++        boostInteraction((int) animator.getDuration());
+     }
+ 
+     @VisibleForTesting
+@@ -2133,6 +2139,7 @@ private void falsingAdditionalTapRequired() {
+     }
+ 
+     private void onTrackingStarted() {
++        boostInteraction(700);
+         endClosing();
+         mShadeRepository.setLegacyShadeTracking(true);
+         if (mTrackingStartedListener != null) {
+@@ -2504,6 +2511,13 @@ public void performHapticFeedback(int constant) {
+         }
+     }
+ 
++    private void boostInteraction(int durationMs) {
++        PowerManagerInternal pmi = LocalServices.getService(PowerManagerInternal.class);
++        if (pmi != null) {
++            pmi.setPowerBoost(Boost.INTERACTION, durationMs);
++        }
++    }
++
+     private class ShadeHeadsUpTrackerImpl implements ShadeHeadsUpTracker {
+         @Override
+         public void addTrackingHeadsUpListener(Consumer<ExpandableNotificationRow> listener) {
+@@ -2849,6 +2863,7 @@ void notifyExpandingStarted() {
+             mIsExpandingOrCollapsing = true;
+             mQsController.onExpandingStarted(mQsController.getFullyExpanded());
+         }
++        boostInteraction(700);
+     }
+ 
+     void notifyExpandingFinished() {
+@@ -2909,6 +2924,7 @@ private void startOpening(MotionEvent event) {
+     private void maybeVibrateOnOpening(boolean openingWithTouch) {
+         if (mVibrateOnOpening && mBarState != KEYGUARD && mBarState != SHADE_LOCKED) {
+             if (!openingWithTouch || !mHasVibratedOnOpen) {
++                boostInteraction(500);
+                 performHapticFeedback(HapticFeedbackConstants.GESTURE_START);
+                 mHasVibratedOnOpen = true;
+                 mShadeLog.v("Vibrating on opening, mHasVibratedOnOpen=true");
+@@ -3100,6 +3116,7 @@ public void onAnimationEnd(Animator animation) {
+         });
+         setAnimator(animator);
+         animator.start();
++        boostInteraction(500);
+     }
+ 
+     @VisibleForTesting
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/notification/stack/NotificationStackScrollLayout.java b/packages/SystemUI/src/com/android/systemui/statusbar/notification/stack/NotificationStackScrollLayout.java
+index 8ce2b5f637a18..6dcd129f73326 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/notification/stack/NotificationStackScrollLayout.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/notification/stack/NotificationStackScrollLayout.java
+@@ -58,7 +58,9 @@
+ import android.graphics.RenderEffect;
+ import android.graphics.RenderNode;
+ import android.graphics.Shader;
++import android.hardware.power.Boost;
+ import android.os.Bundle;
++import android.os.PowerManagerInternal;
+ import android.os.SystemClock;
+ import android.os.Trace;
+ import android.util.AttributeSet;
+@@ -90,6 +92,7 @@
+ import com.android.internal.policy.SystemBarUtils;
+ import com.android.keyguard.BouncerPanelExpansionCalculator;
+ import com.android.keyguard.KeyguardSliceView;
++import com.android.server.LocalServices;
+ import com.android.systemui.Dependency;
+ import com.android.systemui.Dumpable;
+ import com.android.systemui.ExpandHelper;
+@@ -1944,6 +1947,13 @@ private void updateExpandedHeight(float expandFraction) {
+         }
+     }
+ 
++    private void boostInteraction(int durationMs) {
++        PowerManagerInternal pmi = LocalServices.getService(PowerManagerInternal.class);
++        if (pmi != null) {
++            pmi.setPowerBoost(Boost.INTERACTION, durationMs);
++        }
++    }
++
+     @Override
+     public void setQsExpandFraction(float expandFraction) {
+         if (SceneContainerFlag.isUnexpectedlyInLegacyMode()) return;
+@@ -4842,6 +4852,7 @@ void onPanelTrackingStarted() {
+         mPanelTracking = true;
+         mAmbientState.setPanelTracking(true);
+         resetExposedMenuView(true /* animate */, true /* force */);
++        boostInteraction(700);
+     }
+ 
+     void onPanelTrackingStopped() {
