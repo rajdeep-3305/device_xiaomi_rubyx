@@ -1,2 +1,5 @@
 # Allow init to ptrace the fingerprint HAL
 allow init hal_fingerprint_default:process ptrace;
+
+# Allow init to tweak CPU scheduler migration cost
+allow init proc_sched_migration_cost_ns:file write;
