@@ -1,3 +1,6 @@
+# Camera Post Process
+vendor.mediatek.hardware.camera.postproc::IPostProc                                  u:object_r:vendor_mediatek_hardware_camera_postproc_hwservice:s0
+
 # Fingerprint
 vendor.xiaomi.hardware.fx.tunnel::IMiFxTunnel                                        u:object_r:vendor_hal_fingerprint_hwservice_xiaomi:s0
 vendor.xiaomi.hardware.fingerprintextension::IXiaomiFingerprint                      u:object_r:vendor_hal_fingerprint_hwservice_xiaomi:s0
@@ -16,3 +19,4 @@ vendor.xiaomi.hardware.mlipay::IMlipayService                                 u:
 
 # Mtdservice
 vendor.xiaomi.hardware.mtdservice::IMTService                                 u:object_r:hal_mtdservice_hwservice:s0
+
