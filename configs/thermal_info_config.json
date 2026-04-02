@@ -26,8 +26,8 @@
     {
       "Name": "mtktsAP",
       "Type": "SKIN",
-      "HotThreshold": ["NaN", "NaN", "NaN", 50, 70, 80, 90],
-      "VrThreshold": "50.0",
+      "HotThreshold": ["NaN", "NaN", "NaN", 55, 70, 80, 90],
+      "VrThreshold": "55.0",
       "Multiplier": 0.001
     },
     {
