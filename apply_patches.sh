@@ -15,37 +15,45 @@ info()  { echo -e "${GREEN}[patches]${NC} $*"; }
 warn()  { echo -e "${YELLOW}[patches] WARNING:${NC} $*"; }
 error() { echo -e "${RED}[patches] ERROR:${NC} $*"; }
 
-apply_patch_file() {
+apply_patch_dir() {
     local repo_path="$1"
-    local patch_file="$2"
+    local patch_dir="$PATCHES_DIR/$repo_path"
     local target_dir="$ANDROID_ROOT/$repo_path"
-    local patch_name
-    patch_name="$(basename "$patch_file")"
 
     if [ ! -d "$target_dir" ]; then
-        warn "$repo_path not found — skipping $patch_name"
+        warn "$repo_path not found — skipping"
+        return 0
+    fi
+
+    if [ ! -d "$patch_dir" ] || [ -z "$(ls "$patch_dir"/*.patch 2>/dev/null)" ]; then
+        warn "No patches found for $repo_path — skipping"
         return 0
     fi
 
     pushd "$target_dir" > /dev/null
 
-    local subject
-    subject="$(grep '^Subject: ' "$patch_file" | sed 's/Subject: \[PATCH[^]]*\] //' | head -1)"
+    for patch in "$patch_dir"/*.patch; do
+        [ -f "$patch" ] || continue
+        local patch_name
+        patch_name="$(basename "$patch")"
+        local subject
+        subject="$(grep '^Subject: ' "$patch" | sed 's/Subject: \[PATCH[^]]*\] //' | head -1)"
 
-    if git log --oneline | grep -qF "$subject"; then
-        info "Already applied: $patch_name — skipping"
-    else
-        info "Applying: $patch_name → $repo_path"
-        if git am --3way "$patch_file"; then
-            info "✓ $patch_name"
+        if git log --oneline | grep -qF "$subject"; then
+            info "Already applied: $patch_name — skipping"
         else
-            error "Failed to apply $patch_name"
-            git am --abort
-            error "Fix the conflict manually in $repo_path then re-run."
-            popd > /dev/null
-            return 1
+            info "Applying: $patch_name → $repo_path"
+            if git am --3way "$patch"; then
+                info "✓ $patch_name"
+            else
+                error "Failed to apply $patch_name"
+                git am --abort
+                error "Fix conflict manually in $repo_path then re-run."
+                popd > /dev/null
+                return 1
+            fi
         fi
-    fi
+    done
 
     popd > /dev/null
 }
@@ -82,7 +90,7 @@ apply_gerrit_commit() {
         else
             error "Cherry-pick failed"
             git cherry-pick --abort
-            error "Fix the conflict manually in $repo_path then re-run."
+            error "Fix conflict manually in $repo_path then re-run."
             popd > /dev/null
             return 1
         fi
@@ -96,9 +104,11 @@ apply_gerrit_commit() {
 # =============================================================================
 echo ""
 info "========================================="
-info " Applying required patches for rubyx"
+info "   Applying required patches for rubyx"
 info "========================================="
 echo ""
+
+# ── Original rubyx patches ────────────────────────────────────────────────────
 
 # 1. hardware/lineage/compat
 apply_gerrit_commit \
@@ -107,22 +117,29 @@ apply_gerrit_commit \
     "refs/changes/04/447604/1"
 
 # 2. external/wpa_supplicant_8
-apply_patch_file \
-    "external/wpa_supplicant_8" \
-    "$PATCHES_DIR/external/wpa_supplicant_8/0001-nl80211-Do-not-set-NL80211_WPA_VERSION_3.patch"
+apply_patch_dir "external/wpa_supplicant_8"
 
 # 3. frameworks/av
-apply_patch_file \
-    "frameworks/av" \
-    "$PATCHES_DIR/frameworks/av/0001-Revert-stagefright-distinguish-HAL-name-from-name-in-MediaCodecInfo.patch"
+apply_patch_dir "frameworks/av"
 
 # 4. frameworks/base
-apply_patch_file \
-    "frameworks/base" \
-    "$PATCHES_DIR/frameworks/base/0001-SystemUI-Add-interaction-boost-for-QS-shade-animations.patch"
+apply_patch_dir "frameworks/base"
+
+# ── bpf: Android 16 QPR2 BPF patches for 4.19 kernel ──────────────────────────
+# 5. frameworks/native
+apply_patch_dir "frameworks/native"
+
+# 6. packages/modules/DnsResolver
+apply_patch_dir "packages/modules/DnsResolver"
+
+# 7. system/apex
+apply_patch_dir "system/apex"
+
+# 8. system/core
+apply_patch_dir "system/core"
 
 echo ""
 info "========================================="
-info " All patches applied successfully"
+info "    All patches applied successfully"
 info "========================================="
 echo ""
