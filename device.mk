@@ -382,6 +382,11 @@ PRODUCT_SOONG_NAMESPACES += \
 # Speed profile services and wifi-service to reduce RAM and storage
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 
+# Enable whole-program R8 Java optimizations for SystemUI and system_server,
+# but also allow explicit overriding for testing and development.
+SYSTEM_OPTIMIZE_JAVA := true
+SYSTEMUI_OPTIMIZE_JAVA := true
+
 # System server verbosity
 PRODUCT_SYSTEM_SERVER_DEBUG_INFO := false
 
