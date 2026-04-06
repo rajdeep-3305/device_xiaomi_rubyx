@@ -286,6 +286,19 @@ debug.hwui.target_cpu_time_percent=50
 debug.hwui.use_hint_manager=true
 debug.hwui.use_buffer_age=true
 
+# Update engine
+ro.virtual_ab.compression.threads=true
+ro.virtual_ab.cow_op_merge_size=16
+ro.virtual_ab.merge_thread_priority=19
+ro.virtual_ab.num_merge_threads=1
+ro.virtual_ab.num_verify_threads=1
+ro.virtual_ab.num_worker_threads=3
+ro.virtual_ab.o_direct.enabled=true
+ro.virtual_ab.read_ahead_size=16
+ro.virtual_ab.verify_block_size=1048576
+ro.virtual_ab.verify_threshold_size=1073741824
+ro.virtual_ab.worker_thread_priority=0
+
 # ZRAM
 ro.zram.mark_idle_delay_mins=60
 ro.zram.first_wb_delay_mins=180
