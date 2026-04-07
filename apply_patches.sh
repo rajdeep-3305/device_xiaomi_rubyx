@@ -135,9 +135,6 @@ apply_patch_dir "packages/modules/DnsResolver"
 # 7. system/apex
 apply_patch_dir "system/apex"
 
-# 8. system/core
-apply_patch_dir "system/core"
-
 echo ""
 info "========================================="
 info "    All patches applied successfully"
