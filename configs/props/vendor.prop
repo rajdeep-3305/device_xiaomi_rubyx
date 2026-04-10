@@ -291,6 +291,7 @@ wifi.supplicant_scan_interval=120
 # HWUI
 debug.hwui.target_cpu_time_percent=50
 debug.hwui.use_hint_manager=true
+debug.hwui.use_buffer_age=true
 
 # ZRAM
 ro.zram.mark_idle_delay_mins=60
