@@ -79,17 +79,30 @@ on enable-low-power
     write /sys/block/dm-5/queue/read_ahead_kb 128
 
     # sched
-    write /proc/sys/kernel/sched_migration_cost_ns 200000
-    write /proc/sys/kernel/sched_min_granularity_ns 1000000
-    write /proc/sys/kernel/sched_wakeup_granularity_ns 200000
+    write /proc/sys/kernel/sched_migration_cost_ns 500000
+    write /proc/sys/kernel/sched_min_granularity_ns 1500000
+    write /proc/sys/kernel/sched_wakeup_granularity_ns 300000
+    write /proc/sys/kernel/sched_util_clamp_min 64
+    write /proc/sys/kernel/sched_util_clamp_max 1024
     
     # Enable big task rotation
     write /proc/perfmgr/boost_ctrl/eas_ctrl/sched_big_task_rotation 1
 
-    # Configure DVFS
-    write /sys/kernel/ged/hal/dvfs_margin_value 90
-    write /sys/kernel/ged/hal/timer_base_dvfs_margin 60
-    write /sys/kernel/ged/hal/loading_base_dvfs_step 8
+    # GED tuning
+    write /sys/kernel/ged/hal/dvfs_margin_value 75
+    write /sys/kernel/ged/hal/timer_base_dvfs_margin 45
+    write /sys/kernel/ged/hal/dvfs_loading_mode 1
+    write /sys/kernel/ged/hal/custom_upbound_gpu_freq 1
+
+    # Mali GPU stability
+    write /sys/devices/platform/13000000.mali/dvfs_period 50
+
+    # FPSGO tuning
+    write /sys/kernel/fpsgo/common/fpsgo_enable 1
+    write /sys/kernel/fpsgo/fbt/boost_ta 1
+    write /sys/kernel/fpsgo/common/stop_boost 0
+    write /sys/kernel/fpsgo/fbt/enable_switch_sync_flag 1
+    write /sys/kernel/fpsgo/fbt/enable_switch_cap_margin 1
 
     # Utilization Clamping
     # Tuning
@@ -127,7 +140,7 @@ on enable-low-power
     # top-app
     write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
     write /dev/cpuctl/top-app/cpu.uclamp.max max
-    write /dev/cpuctl/top-app/cpu.uclamp.min 10
+    write /dev/cpuctl/top-app/cpu.uclamp.min 20
     write /dev/cpuctl/top-app/cpu.shares 20480
 
     # nnapi-hal
@@ -139,7 +152,7 @@ on enable-low-power
     # camera-daemon
     write /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive 1
     write /dev/cpuctl/camera-daemon/cpu.uclamp.max max
-    write /dev/cpuctl/camera-daemon/cpu.uclamp.min 0
+    write /dev/cpuctl/camera-daemon/cpu.uclamp.min 20
     write /dev/cpuctl/camera-daemon/cpu.shares 20480
 
     # Dex2Oat
