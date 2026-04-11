@@ -126,13 +126,11 @@ apply_patch_dir "frameworks/av"
 apply_patch_dir "frameworks/base"
 
 # ── bpf: Android 16 QPR2 BPF patches for 4.19 kernel ──────────────────────────
-# 5. frameworks/native
-apply_patch_dir "frameworks/native"
 
-# 6. packages/modules/DnsResolver
+# 5. packages/modules/DnsResolver
 apply_patch_dir "packages/modules/DnsResolver"
 
-# 7. system/apex
+# 6. system/apex
 apply_patch_dir "system/apex"
 
 echo ""
