@@ -132,6 +132,7 @@ TARGET_COPY_OUT_VENDOR := vendor
 
 # Platform
 TARGET_BOARD_PLATFORM := mt6877
+TARGET_BOARD_PLATFORM_GPU := mali-g68mc4
 BOARD_VENDOR := xiaomi
 
 # Properties
