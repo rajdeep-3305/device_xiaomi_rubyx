@@ -47,7 +47,7 @@ on init
     # fs
     write /dev/sys/fs/by-name/userdata/iostat_enable 0
     write /dev/sys/fs/by-name/userdata/cp_interval 6000
-    write /dev/sys/fs/by-name/userdata/gc_urgent_sleep_time 200
+    write /dev/sys/fs/by-name/userdata/gc_urgent_sleep_time 500
 
     # VM
     write /proc/sys/vm/dirty_expire_centisecs 3000
@@ -90,7 +90,7 @@ on enable-low-power
 
     # GED tuning
     write /sys/kernel/ged/hal/dvfs_margin_value 75
-    write /sys/kernel/ged/hal/timer_base_dvfs_margin 45
+    write /sys/kernel/ged/hal/timer_base_dvfs_margin 60
     write /sys/kernel/ged/hal/dvfs_loading_mode 1
     write /sys/kernel/ged/hal/custom_upbound_gpu_freq 1
 
@@ -152,7 +152,7 @@ on enable-low-power
     # camera-daemon
     write /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive 1
     write /dev/cpuctl/camera-daemon/cpu.uclamp.max max
-    write /dev/cpuctl/camera-daemon/cpu.uclamp.min 20
+    write /dev/cpuctl/camera-daemon/cpu.uclamp.min 0
     write /dev/cpuctl/camera-daemon/cpu.shares 20480
 
     # Dex2Oat

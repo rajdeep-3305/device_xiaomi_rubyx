@@ -871,7 +871,7 @@ on boot
     chmod 0664 /sys/devices/platform/13000000.mali/dvfs_period
   
     # Adjust watermark level
-    write /proc/sys/vm/watermark_scale_factor 150
+    write /proc/sys/vm/watermark_scale_factor 100
     
     # sched
     write /proc/sys/kernel/sched_latency_ns 8000000
