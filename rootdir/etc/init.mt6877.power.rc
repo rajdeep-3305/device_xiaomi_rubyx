@@ -103,6 +103,8 @@ on enable-low-power
     write /sys/kernel/fpsgo/common/stop_boost 0
     write /sys/kernel/fpsgo/fbt/enable_switch_sync_flag 1
     write /sys/kernel/fpsgo/fbt/enable_switch_cap_margin 1
+    write /sys/kernel/fpsgo/fbt/ultra_rescue 1
+    write /sys/kernel/fpsgo/fstb/margin_mode 1
 
     # Utilization Clamping
     # Tuning
