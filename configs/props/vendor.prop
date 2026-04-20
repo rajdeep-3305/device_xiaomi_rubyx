@@ -215,6 +215,7 @@ ro.vendor.mtk_nn_support=1
 
 # Perf
 ro.vendor.perf.framepacing.enable=1
+ro.max.fling_velocity=10000
 
 # Platform
 ro.board.platform=mt6877
