@@ -125,12 +125,15 @@ apply_patch_dir "frameworks/av"
 # 4. frameworks/base
 apply_patch_dir "frameworks/base"
 
+# 5. system/core [miuicamera]
+apply_patch_dir "system/core"
+
 # ── bpf: Android 16 QPR2 BPF patches for 4.19 kernel ──────────────────────────
 
-# 5. packages/modules/DnsResolver
+# 6. packages/modules/DnsResolver
 apply_patch_dir "packages/modules/DnsResolver"
 
-# 6. system/apex
+# 7. system/apex
 apply_patch_dir "system/apex"
 
 echo ""

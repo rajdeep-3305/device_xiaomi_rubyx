@@ -1,0 +1,32 @@
+From f96f3f91032d1630104c635e525b7c1e3316ec7e Mon Sep 17 00:00:00 2001
+From: Aeron-Aeron <aeronrules2@gmail.com>
+Date: Mon, 20 Apr 2026 14:05:32 +0545
+Subject: [PATCH] libutils: binder: disable CallStack for MiuiCamera lag fix
+
+MiuiCamera lags ~3.5s on lens/mode switch because
+libmialgoengine.so destroys ~170 sp<MiaNode> objects per session
+teardown. Without ANDROID_UTILS_CALLSTACK_ENABLED=0, each
+destruction triggers a full 50-frame native stack unwind via
+RefBase — ~20ms per call — gating MIADestroySession.
+
+Adding the flag to libutils_binder_impl_defaults_nodeps_no_apex
+kills the stack dump while keeping the one-line warning.
+switch_prefix_camera_setup drops from ~3500ms to under 500ms.
+
+Signed-off-by: Aeron-Aeron <aeronrules2@gmail.com>
+---
+ libutils/binder/Android.bp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/libutils/binder/Android.bp b/libutils/binder/Android.bp
+index f6a777e..13e7bd1 100644
+--- a/libutils/binder/Android.bp
++++ b/libutils/binder/Android.bp
+@@ -53,6 +53,7 @@ cc_defaults {
+         "-Winvalid-offsetof",
+         "-Wsequence-point",
+         "-Wzero-as-null-pointer-constant",
++        "-DANDROID_UTILS_CALLSTACK_ENABLED=0",
+     ],
+ 
+     afdo: true,
