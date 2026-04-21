@@ -1,9 +1,0 @@
-{
-    "device": null,
-    "devices": null,
-    "has_device_suffix": false,
-    "original_device": null,
-    "original_name": "WifiResOverlayRuby",
-    "original_package": "com.android.wifi.resources.ruby",
-    "original_target_package": "com.android.wifi.resources"
-}

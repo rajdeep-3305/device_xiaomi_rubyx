@@ -4,14 +4,6 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <!-- Doze: does this device support STATE_DOZE?  -->
-    <bool name="doze_display_state_supported">true</bool>
-
-    <!-- Type of a sensor that provides a low-power estimate of the desired display
-         brightness, suitable to listen to while the device is asleep (e.g. during
-         always-on display) -->
-    <string name="doze_brightness_sensor_type">xiaomi.sensor.aod</string>
-
     <!-- Doze: Table that translates sensor values from the doze_brightness_sensor_type sensor
                to brightness values in the integer scale [1, 255]; -1 means keeping the current
                brightness. -->
@@ -39,4 +31,12 @@
 
     <!-- Preferred max refresh rate at keyguard, if supported by the display. -->
     <integer name="config_keyguardMaxRefreshRate">60</integer>
+
+    <!-- Type of a sensor that provides a low-power estimate of the desired display
+         brightness, suitable to listen to while the device is asleep (e.g. during
+         always-on display) -->
+    <string name="doze_brightness_sensor_type">xiaomi.sensor.aod</string>
+
+    <!-- Doze: does this device support STATE_DOZE?  -->
+    <bool name="doze_display_state_supported">true</bool>
 </resources>
