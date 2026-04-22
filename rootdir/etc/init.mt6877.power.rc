@@ -91,11 +91,7 @@ on enable-low-power
     # GED tuning
     write /sys/kernel/ged/hal/dvfs_margin_value 75
     write /sys/kernel/ged/hal/timer_base_dvfs_margin 60
-    write /sys/kernel/ged/hal/dvfs_loading_mode 1
     write /sys/kernel/ged/hal/custom_upbound_gpu_freq 1
-
-    # Mali GPU stability
-    write /sys/devices/platform/13000000.mali/dvfs_period 50
 
     # FPSGO tuning
     write /sys/kernel/fpsgo/common/fpsgo_enable 1

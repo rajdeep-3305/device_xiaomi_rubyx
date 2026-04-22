@@ -137,38 +137,38 @@
     {
       "PowerHint": "INTERACTION",
       "Node": "TAUclampMin",
-      "Duration": 400,
+      "Duration": 600,
       "Value": "60"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "FGUclampMin",
-      "Duration": 400,
+      "Duration": 600,
       "Value": "40"
     },
     {
       "PowerHint": "INTERACTION",
-      "Node": "DRAMOppMin",
-      "Duration": 400,
-      "Value": "1"
-    },
-    {
-      "PowerHint": "INTERACTION",
       "Node": "GPUBlockBoost",
-      "Duration": 400,
+      "Duration": 600,
       "Value": "60"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "GPUSchedMode",
-      "Duration": 400,
+      "Duration": 600,
       "Value": "1"
     },
     {
       "PowerHint": "INTERACTION",
-      "Node": "SchedBoost",
-      "Duration": 400,
-      "Value": "1"
+      "Node": "GPUSchedPeriod",
+      "Duration": 600,
+      "Value": "50"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "GPUDVFSInterval",
+      "Duration": 600,
+      "Value": "45"
     },
 
     {

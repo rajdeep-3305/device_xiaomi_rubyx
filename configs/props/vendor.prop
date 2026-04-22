@@ -87,7 +87,7 @@ debug.sf.auto_latch_unsignaled=false
 debug.sf.enable_gl_backpressure=0
 debug.sf.enable_hwc_vds=0
 debug.sf.enable_egl_image_tracker=0
-debug.sf.latch_unsignaled=true
+debug.sf.latch_unsignaled=0
 debug.sf.predict_hwc_composition_strategy=0
 debug.sf.treat_170m_as_sRGB=1
 persist.sys.sf.color_mode=0
@@ -223,7 +223,7 @@ ro.soc.manufacturer=Mediatek
 ro.soc.model=MT6877
 
 # Power
-vendor.powerhal.interaction.max=400
+vendor.powerhal.interaction.max=650
 vendor.powerhal.interaction.min=30
 vendor.powerhal.interaction.offset=0
 
