@@ -3,6 +3,9 @@ ro.product.mod_device=ruby_global
 
 # Display
 persist.sys.brightness.low.gamma=true
+persist.sys.sf.color_mode=0
+persist.sys.sf.color_saturation=1.0
+persist.sys.sf.native_mode=0
 
 # Dalvik
 dalvik.vm.dex2oat64.enabled=true
@@ -10,17 +13,20 @@ dalvik.vm.dex2oat64.enabled=true
 # eBPF
 ro.bpf.kver_override=5.10.239
 
+# FUSE passthrough
+persist.sys.fuse.passthrough.enable=true
+
 # IMS
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=1
 persist.dbg.wfc_avail_ovr=1
 
-# Wi-Fi
-ro.vendor.wifi.sap.concurrent.iface=ap1
-ro.vendor.wifi.sap.interface=ap0
-ro.vendor.wlan.chrdev=wmt_chrdev_wifi
-ro.vendor.wlan.gen=gen4m  
-wifi.supplicant_scan_interval=120
+# Phantom process monitoring
+persist.sys.fflag.override.settings_enable_monitor_phantom_procs=false
+
+# Scroll Optimiser
+persist.sys.perf.scroll_opt=true
+persist.sys.perf.scroll_opt.heavy_app=1
 
 # Zygote
 zygote.critical_window.minute=10

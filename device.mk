@@ -127,10 +127,6 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 USE_DEX2OAT_DEBUG := false
 
-# Control groups and task profiles
-PRODUCT_COPY_FILES += \
-    system/core/libprocessgroup/profiles/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
-    system/core/libprocessgroup/profiles/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
 # Display
 PRODUCT_PACKAGES += \
@@ -138,10 +134,6 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack-service.mediatek-mali
 
 $(call soong_config_set_bool,stagefright,target_disable_thumbnail_block_model,true)
-
-# Boot animation
-TARGET_SCREEN_HEIGHT := 2400
-TARGET_SCREEN_WIDTH := 1080
 
 # Dolby
 $(call inherit-product, hardware/dolby/dolby.mk)
@@ -248,6 +240,7 @@ PRODUCT_PACKAGES += \
     SettingsOverlayRuby \
     SystemUIOverlayRuby \
     TetheringResOverlayRuby \
+    NfcResOverlayRuby \
     WifiResOverlayRuby
 
 DEVICE_PACKAGE_OVERLAYS += \
@@ -387,9 +380,6 @@ PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 SYSTEM_OPTIMIZE_JAVA := true
 SYSTEMUI_OPTIMIZE_JAVA := true
 
-# System server verbosity
-PRODUCT_SYSTEM_SERVER_DEBUG_INFO := false
-
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal-service.mediatek
@@ -403,7 +393,7 @@ PRODUCT_PACKAGES += \
     android.hardware.usb.gadget-service.mediatek
     
 # Vibrator
-$(call soong_config_set, vibrator, vibratortargets, vibratoraidlV2target)
+$(call soong_config_set,vibrator,vibratortargets,vibratoraidlV2target)
 
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.vibrator.service

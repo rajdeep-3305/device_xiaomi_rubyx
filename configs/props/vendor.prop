@@ -90,9 +90,6 @@ debug.sf.enable_egl_image_tracker=0
 debug.sf.latch_unsignaled=0
 debug.sf.predict_hwc_composition_strategy=0
 debug.sf.treat_170m_as_sRGB=1
-persist.sys.sf.color_mode=0
-persist.sys.sf.color_saturation=1.0
-persist.sys.sf.native_mode=0
 persist.vendor.sys.pq.disp.mi.soft.brightness=1
 ro.hardware.egl=meow
 ro.hardware.hwcomposer=mtk_common
@@ -158,14 +155,8 @@ ro.netflix.bsp_rev=MTK6877-33678-1
 persist.vendor.fingerprint.sensor_location=1080|905|200|local:4627039422300187648
 persist.vendor.fingerprint.type=side
 
-# FUSE passthrough
-persist.sys.fuse.passthrough.enable=true
-
 # Gatekeeper
 ro.hardware.gatekeeper=beanpod
-
-# GNSS
-ro.vendor.mtk_log_hide_gps=1
 
 # IMS
 persist.vendor.anr.enhancement=0
@@ -226,6 +217,14 @@ ro.soc.model=MT6877
 vendor.powerhal.interaction.max=650
 vendor.powerhal.interaction.min=30
 vendor.powerhal.interaction.offset=0
+
+
+# Wi-Fi
+ro.vendor.wifi.sap.concurrent.iface=ap1
+ro.vendor.wifi.sap.interface=ap0
+ro.vendor.wlan.chrdev=wmt_chrdev_wifi
+ro.vendor.wlan.gen=gen4m
+wifi.supplicant_scan_interval=120
 
 # Radio
 import /vendor/etc/rsc/${ro.boot.hwc}/ro.prop
@@ -304,7 +303,3 @@ ro.virtual_ab.worker_thread_priority=0
 ro.zram.mark_idle_delay_mins=60
 ro.zram.first_wb_delay_mins=180
 ro.zram.periodic_wb_delay_hours=24
-
-# Scroll Optimiser
-persist.sys.perf.scroll_opt=true
-persist.sys.perf.scroll_opt.heavy_app=1

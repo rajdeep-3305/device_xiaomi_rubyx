@@ -49,10 +49,6 @@ on post-fs-data
     chmod 0660 /dev/spm
     chown system system /dev/spm
 
-    # cit led
-    chown system system /sys/class/leds/torch-light0/brightness
-    chown system system /sys/class/leds/flash-light0/brightness
-
 # displayfeature
 on boot
     # Display feature sysfs node

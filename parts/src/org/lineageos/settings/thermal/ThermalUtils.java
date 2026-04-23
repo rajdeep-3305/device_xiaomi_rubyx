@@ -81,7 +81,7 @@ public final class ThermalUtils {
 
         if (value != null) {
              String[] modes = value.split(":");
-             if (modes.length < 5) value = null;
+             if (modes.length < 8) value = null;
          }
 
         if (value == null || value.isEmpty()) {

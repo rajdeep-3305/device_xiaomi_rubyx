@@ -11,7 +11,7 @@ on property:init.svc.vendor.charger=running
     write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpufreq/policy6/scaling_governor "powersave"
 
-    # Keep one LITTLE and one big              
+    # Keep one LITTLE and one big
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
@@ -56,7 +56,7 @@ on init
 on enable-low-power
     # Enable UFS Powersaving
     write /sys/devices/platform/11270000.ufshci/clkgate_enable 1
-    
+
     # End boot time tuning
     write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor "schedutil"
     write /sys/devices/system/cpu/cpufreq/policy6/scaling_governor "schedutil"
@@ -84,7 +84,7 @@ on enable-low-power
     write /proc/sys/kernel/sched_wakeup_granularity_ns 300000
     write /proc/sys/kernel/sched_util_clamp_min 0
     write /proc/sys/kernel/sched_util_clamp_max 1024
-    
+
     # Enable big task rotation
     write /proc/perfmgr/boost_ctrl/eas_ctrl/sched_big_task_rotation 1
 
@@ -106,7 +106,7 @@ on enable-low-power
     # Tuning
     write /proc/sys/kernel/sched_util_clamp_min_rt_default 0
     write /proc/sys/kernel/sched_util_clamp_min 0
-   
+
     # rt
     write /dev/cpuctl/rt/cpu.uclamp.latency_sensitive 1
     write /dev/cpuctl/rt/cpu.uclamp.max max
@@ -125,7 +125,7 @@ on enable-low-power
 
     # background
     write /dev/cpuctl/background/cpu.uclamp.latency_sensitive 0
-    write /dev/cpuctl/background/cpu.uclamp.max 20 
+    write /dev/cpuctl/background/cpu.uclamp.max 20
     write /dev/cpuctl/background/cpu.uclamp.min 0
     write /dev/cpuctl/background/cpu.shares 1024
 
@@ -182,5 +182,5 @@ service vendor.hwcomposer-2-3 /vendor/bin/hw/android.hardware.graphics.composer@
     capabilities SYS_NICE
     onrestart restart surfaceflinger
     task_profiles HighPerformance
-   
+
     override

@@ -1,5 +1,6 @@
 bluetooth.device.default_name=Redmi Note 12 Pro 5G
 ro.product.odm.brand=Redmi
 ro.product.odm.device=ruby
+ro.product.odm.manufacturer=Xiaomi
 ro.product.odm.model=22101316I
 ro.product.odm.name=ruby_in

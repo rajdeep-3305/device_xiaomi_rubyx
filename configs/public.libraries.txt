@@ -31,7 +31,6 @@ vendor.mediatek.hardware.camera.isphal@1.0.so 64
 libmiai_portraitsupernight.so 64
 libbeauty_face_interface.so 64
 vendor.mediatek.hardware.camera.atms@1.0.so 64
-libmiai_portraitsupernight.so 64
 vendor.mediatek.hardware.mtkpower@1.0.so 64
 vendor.mediatek.hardware.mtkpower@1.1.so 64
 vendor.mediatek.hardware.mtkpower@1.2.so 64
