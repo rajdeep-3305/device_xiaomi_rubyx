@@ -79,7 +79,7 @@ on enable-low-power
     write /sys/block/dm-5/queue/read_ahead_kb 128
 
     # sched
-    write /proc/sys/kernel/sched_migration_cost_ns 500000
+    write /proc/sys/kernel/sched_migration_cost_ns 200000
     write /proc/sys/kernel/sched_min_granularity_ns 1500000
     write /proc/sys/kernel/sched_wakeup_granularity_ns 300000
     write /proc/sys/kernel/sched_util_clamp_min 0
@@ -89,7 +89,7 @@ on enable-low-power
     write /proc/perfmgr/boost_ctrl/eas_ctrl/sched_big_task_rotation 1
 
     # GED tuning
-    write /sys/kernel/ged/hal/dvfs_margin_value 75
+    write /sys/kernel/ged/hal/dvfs_margin_value 130
     write /sys/kernel/ged/hal/timer_base_dvfs_margin 60
     write /sys/kernel/ged/hal/custom_upbound_gpu_freq 1
 
@@ -100,7 +100,7 @@ on enable-low-power
     write /sys/kernel/fpsgo/fbt/enable_switch_sync_flag 1
     write /sys/kernel/fpsgo/fbt/enable_switch_cap_margin 1
     write /sys/kernel/fpsgo/fbt/ultra_rescue 1
-    write /sys/kernel/fpsgo/fstb/margin_mode 1
+    write /sys/kernel/fpsgo/fstb/margin_mode 2
 
     # Utilization Clamping
     # Tuning
@@ -138,7 +138,7 @@ on enable-low-power
     # top-app
     write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
     write /dev/cpuctl/top-app/cpu.uclamp.max max
-    write /dev/cpuctl/top-app/cpu.uclamp.min 20
+    write /dev/cpuctl/top-app/cpu.uclamp.min 0
     write /dev/cpuctl/top-app/cpu.shares 20480
 
     # nnapi-hal
