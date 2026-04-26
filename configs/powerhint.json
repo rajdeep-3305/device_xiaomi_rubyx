@@ -26,7 +26,7 @@
       "ResetOnInit": true
     },
     {
-      "Name": "GPUSchedPeriod",
+      "Name": "GPUDVFSPeriod",
       "Path": "/sys/devices/platform/13000000.mali/dvfs_period",
       "Values": [
         "50",
@@ -37,14 +37,48 @@
       "ResetOnInit": true
     },
     {
-      "Name": "GPUDVFSInterval",
+      "Name": "MaliJSSchedPeriod",
+      "Path": "/sys/devices/platform/13000000.mali/js_scheduling_period",
+      "Values": [
+        "50",
+        "75",
+        "100"
+      ],
+      "DefaultIndex": 2,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "MaliJSCtxMode",
+      "Path": "/sys/devices/platform/13000000.mali/js_ctx_scheduling_mode",
+      "Values": [
+        "0",
+        "1"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "GPUDVFSMargin",
       "Path": "/sys/kernel/ged/hal/timer_base_dvfs_margin",
       "Values": [
+        "18743356",
         "45",
-        "60",
-        "75"
+        "50",
+        "60"
       ],
-      "DefaultIndex": 1,
+      "DefaultIndex": 2,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "GPUDVFSLoadingStep",
+      "Path": "/sys/kernel/ged/hal/loading_base_dvfs_step",
+      "Values": [
+        "771",
+        "15",
+        "4",
+        "0"
+      ],
+      "DefaultIndex": 2,
       "ResetOnInit": true
     },
     {
@@ -73,6 +107,16 @@
         "0"
       ],
       "DefaultIndex": 5,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "TAUclampLatency",
+      "Path": "/dev/cpuctl/top-app/cpu.uclamp.latency_sensitive",
+      "Values": [
+        "1",
+        "0"
+      ],
+      "DefaultIndex": 1,
       "ResetOnInit": true
     },
     {
@@ -108,6 +152,26 @@
       "ResetOnInit": true
     },
     {
+      "Name": "CCIMode",
+      "Path": "/proc/cpufreq/cpufreq_cci_mode",
+      "Values": [
+        "1",
+        "0"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "PMQoSCpuDmaLatency",
+      "Path": "/dev/cpu_dma_latency",
+      "Values": [
+        "44",
+        "1000"
+      ],
+      "DefaultIndex": 1,
+      "HoldFd": true
+    },
+    {
       "Name": "PowerHALAudioState",
       "Path": "vendor.powerhal.audio",
       "Values": [
@@ -133,12 +197,23 @@
       "Duration": 0,
       "Value": "AUDIO_STREAMING_LOW_LATENCY"
     },
-
+    {
+      "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
+      "Node": "TAUclampLatency",
+      "Duration": 0,
+      "Value": "1"
+    },
     {
       "PowerHint": "INTERACTION",
       "Node": "TAUclampMin",
       "Duration": 600,
       "Value": "60"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "TAUclampLatency",
+      "Duration": 600,
+      "Value": "1"
     },
     {
       "PowerHint": "INTERACTION",
@@ -150,7 +225,7 @@
       "PowerHint": "INTERACTION",
       "Node": "GPUBlockBoost",
       "Duration": 600,
-      "Value": "60"
+      "Value": "50"
     },
     {
       "PowerHint": "INTERACTION",
@@ -160,17 +235,28 @@
     },
     {
       "PowerHint": "INTERACTION",
-      "Node": "GPUSchedPeriod",
+      "Node": "GPUDVFSPeriod",
       "Duration": 600,
       "Value": "50"
     },
     {
       "PowerHint": "INTERACTION",
-      "Node": "GPUDVFSInterval",
+      "Node": "MaliJSSchedPeriod",
       "Duration": 600,
-      "Value": "45"
+      "Value": "50"
     },
-
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "GPUDVFSMargin",
+      "Duration": 600,
+      "Value": "50"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "GPUDVFSLoadingStep",
+      "Duration": 600,
+      "Value": "4"
+    },
     {
       "PowerHint": "LAUNCH",
       "Node": "TAUclampMin",
@@ -179,6 +265,12 @@
     },
     {
       "PowerHint": "LAUNCH",
+      "Node": "TAUclampLatency",
+      "Duration": 2000,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "LAUNCH",
       "Node": "FGUclampMin",
       "Duration": 2000,
       "Value": "60"
@@ -203,29 +295,45 @@
     },
     {
       "PowerHint": "LAUNCH",
+      "Node": "GPUDVFSMargin",
+      "Duration": 2000,
+      "Value": "18743356"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "GPUDVFSLoadingStep",
+      "Duration": 2000,
+      "Value": "771"
+    },
+    {
+      "PowerHint": "LAUNCH",
       "Node": "SchedBoost",
       "Duration": 2000,
       "Value": "1"
     },
-
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "CCIMode",
+      "Duration": 2000,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 2000,
+      "Value": "44"
+    },
     {
       "PowerHint": "CAMERA_LAUNCH",
       "Node": "CDUclampMin",
       "Duration": 1500,
       "Value": "60"
     },
-
     {
       "PowerHint": "EXPENSIVE_RENDERING",
-      "Node": "GPUBlockBoost",
+      "Node": "PowerHALRenderingState",
       "Duration": 0,
-      "Value": "70"
-    },
-    {
-      "PowerHint": "EXPENSIVE_RENDERING",
-      "Node": "FGUclampMin",
-      "Duration": 0,
-      "Value": "40"
+      "Value": "EXPENSIVE_RENDERING"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
@@ -235,15 +343,21 @@
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
-      "Node": "GPUSchedPeriod",
+      "Node": "TAUclampLatency",
       "Duration": 0,
-      "Value": "50"
+      "Value": "1"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
-      "Node": "GPUDVFSInterval",
+      "Node": "FGUclampMin",
       "Duration": 0,
-      "Value": "45"
+      "Value": "40"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "GPUBlockBoost",
+      "Duration": 0,
+      "Value": "70"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
@@ -253,7 +367,31 @@
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
-      "Node": "SchedBoost",
+      "Node": "GPUDVFSPeriod",
+      "Duration": 0,
+      "Value": "50"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "MaliJSSchedPeriod",
+      "Duration": 0,
+      "Value": "50"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "GPUDVFSMargin",
+      "Duration": 0,
+      "Value": "45"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "GPUDVFSLoadingStep",
+      "Duration": 0,
+      "Value": "15"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "MaliJSCtxMode",
       "Duration": 0,
       "Value": "1"
     },
@@ -265,9 +403,9 @@
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
-      "Node": "PowerHALRenderingState",
+      "Node": "SchedBoost",
       "Duration": 0,
-      "Value": "EXPENSIVE_RENDERING"
+      "Value": "1"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
