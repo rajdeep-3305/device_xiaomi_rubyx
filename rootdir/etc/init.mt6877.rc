@@ -20,6 +20,8 @@ on init
     # uclamp perms
     chmod 0664 /dev/cpuctl/top-app/cpu.uclamp.min
     chown system system /dev/cpuctl/top-app/cpu.uclamp.min
+    chmod 0664 /dev/cpuctl/foreground/cpu.uclamp.min
+    chown system system /dev/cpuctl/foreground/cpu.uclamp.min
 
     # Assign reasonable ceiling values for socket rcv/snd buffers
     write /proc/sys/net/core/rmem_max  8388608
@@ -869,10 +871,14 @@ on boot
     chmod 0664 /sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/policy6/scaling_min_freq
 
-    # Allow Power HAL to control dvfs
+    # Allow Power HAL to control mali nodes
     chown system system /sys/devices/platform/13000000.mali/dvfs_period
     chmod 0664 /sys/devices/platform/13000000.mali/dvfs_period
-  
+    chown system system /sys/devices/platform/13000000.mali/js_scheduling_period
+    chmod 0664 /sys/devices/platform/13000000.mali/js_scheduling_period
+    chown system system /sys/devices/platform/13000000.mali/js_ctx_scheduling_mode
+    chmod 0664 /sys/devices/platform/13000000.mali/js_ctx_scheduling_mode  
+
     # Adjust watermark level
     write /proc/sys/vm/watermark_scale_factor 100
     
