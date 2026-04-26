@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<perf-config>
+    <!-- GPU boost handled by powerhint.json GED nodes -->
+    <!-- DRAM boost handled by powerhint.json perfmgr ddr node -->
+
+    <hint name="launch">
+        <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="cpu_max_c0">1</res>
+        <res name="cpu_max_c1">1</res>
+        <res name="cpuset_svp">1</res>
+        <res name="uclamp_fg">100</res>
+        <res name="uclamp_top">100</res>
+        <res name="rr_fling">1</res>
+        <int name="duration_ms">2000</int>
+    </hint>
+
+    <hint name="fling">
+        <res name="cpu_min_c1">-1</res>
+        <res name="uclamp_fg">60</res>
+        <res name="rr_fling">1</res>
+        <int name="duration_ms">1000</int>
+    </hint>
+
+    <hint name="shade">
+        <res name="cpuset_svp">1</res>
+        <res name="cpuset_sysui">1</res>
+        <res name="cpuset_top">1</res>
+        <res name="uclamp_fg">60</res>
+        <res name="uclamp_top">60</res>
+    </hint>
+
+    <hint name="game">
+        <res name="uclamp_top">100</res>
+    </hint>
+
+    <hint name="scroll_input">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <hint name="scroll_prefiling">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <hint name="scroll_vertical">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <hint name="scroll_scroller">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <hint name="frame_prefetcher">
+        <int name="duration_ms">100</int>
+    </hint>
+
+    <hint name="frame_real_draw">
+        <int name="duration_ms">100</int>
+    </hint>
+
+    <hint name="frame_obtain_view">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">100</int>
+    </hint>
+
+    <hint name="frame_render_info">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">100</int>
+    </hint>
+
+    <hint name="ime_show_hide">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">200</int>
+    </hint>
+
+    <hint name="ime_init">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">200</int>
+    </hint>
+</perf-config>
