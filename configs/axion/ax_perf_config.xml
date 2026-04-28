@@ -1,69 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <perf-config>
-    <!-- GPU boost handled by powerhint.json GED nodes -->
-    <!-- DRAM boost handled by powerhint.json perfmgr ddr node -->
+
+    <!-- ================================================================== -->
+    <!-- PATH DECLARATIONS                                                   -->
+    <!-- ================================================================== -->
+
+    <path name="gpu_dvfs_margin">/sys/kernel/ged/hal/timer_base_dvfs_margin</path>
+    <int name="gpu_dvfs_margin_boost">50</int>
+    <int name="gpu_dvfs_margin_default">30</int>
+
+    <path name="gpu_dvfs_step">/sys/kernel/ged/hal/loading_base_dvfs_step</path>
+    <int name="gpu_dvfs_step_boost">16</int>
+    <int name="gpu_dvfs_step_default">103</int>
+
+    <path name="gpu_boost_level">/sys/kernel/ged/hal/gpu_boost_level</path>
+    <path name="gpu_custom_boost_freq">/sys/kernel/ged/hal/custom_boost_gpu_freq</path>
+    <path name="gpu_custom_upbound_freq">/sys/kernel/ged/hal/custom_upbound_gpu_freq</path>
+    <path name="gpu_dvfs_loading_mode">/sys/kernel/ged/hal/dvfs_loading_mode</path>
+
+    <path name="cci_freq">/sys/kernel/cm_mgr/dbg_cm_mgr</path>
+
+    <path name="pmqos_cpu_dma_latency">/dev/cpu_dma_latency</path>
+    <int name="pmqos_default_us">1000000</int>
+
+    <!-- ================================================================== -->
+    <!-- APP LAUNCH                                                          -->
+    <!-- ================================================================== -->
 
     <hint name="launch">
         <res name="cpu_min_c0">-1</res>
         <res name="cpu_min_c1">-1</res>
         <res name="cpu_max_c0">1</res>
         <res name="cpu_max_c1">1</res>
+        <res name="gpu_boost">1</res>
+        <res name="dram_min">-1</res>
         <res name="cpuset_svp">1</res>
-        <res name="uclamp_fg">100</res>
-        <res name="uclamp_top">100</res>
+        <res name="uclamp_fg">70</res>
+        <res name="uclamp_top">70</res>
         <res name="rr_fling">1</res>
-        <int name="duration_ms">2000</int>
+        <int name="duration_ms">500</int>
     </hint>
+
+    <hint name="first_launch">
+        <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="cpu_max_c0">1</res>
+        <res name="cpu_max_c1">1</res>
+        <res name="gpu_boost">1</res>
+        <res name="dram_min">-1</res>
+        <res name="cpuset_svp">1</res>
+        <res name="uclamp_fg">70</res>
+        <res name="uclamp_top">70</res>
+        <res name="uclamp_top_lat">1</res>
+        <res name="uclamp_fg_max">100</res>
+        <res name="pmqos_cpu_dma_latency">44</res>
+        <res name="rr_fling">1</res>
+        <int name="duration_ms">800</int>
+    </hint>
+
+    <hint name="warm_launch">
+        <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="dram_min">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="uclamp_top">50</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <hint name="subseq_launch">
+        <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="dram_min">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="uclamp_top">50</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <!-- ================================================================== -->
+    <!-- SCROLLING / FLING                                                   -->
+    <!-- ================================================================== -->
 
     <hint name="fling">
+        <res name="cpu_min_c0">-1</res>
         <res name="cpu_min_c1">-1</res>
-        <res name="uclamp_fg">60</res>
+        <res name="uclamp_fg">70</res>
+        <res name="uclamp_top">80</res>
+        <res name="uclamp_top_lat">1</res>
         <res name="rr_fling">1</res>
-        <int name="duration_ms">1000</int>
-    </hint>
-
-    <hint name="shade">
-        <res name="cpuset_svp">1</res>
-        <res name="cpuset_sysui">1</res>
-        <res name="cpuset_top">1</res>
-        <res name="uclamp_fg">60</res>
-        <res name="uclamp_top">60</res>
-    </hint>
-
-    <hint name="game">
-        <res name="uclamp_top">100</res>
     </hint>
 
     <hint name="scroll_input">
         <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="uclamp_fg">70</res>
+        <res name="uclamp_top">80</res>
+        <res name="uclamp_top_lat">1</res>
         <int name="duration_ms">300</int>
     </hint>
 
     <hint name="scroll_prefiling">
         <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="dram_min">-1</res>
+        <res name="uclamp_fg">70</res>
+        <res name="uclamp_top">80</res>
+        <res name="uclamp_top_lat">1</res>
         <int name="duration_ms">300</int>
     </hint>
 
     <hint name="scroll_vertical">
         <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="uclamp_fg">70</res>
+        <res name="uclamp_top">80</res>
+        <res name="uclamp_top_lat">1</res>
         <int name="duration_ms">300</int>
     </hint>
 
     <hint name="scroll_scroller">
         <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="uclamp_fg">70</res>
+        <res name="uclamp_top">80</res>
+        <res name="uclamp_top_lat">1</res>
         <int name="duration_ms">300</int>
     </hint>
 
+    <!-- ================================================================== -->
+    <!-- FRAME RENDERING                                                     -->
+    <!-- ================================================================== -->
+
     <hint name="frame_prefetcher">
+        <res name="cpu_min_c0">-1</res>
+        <res name="dram_min">-1</res>
         <int name="duration_ms">100</int>
     </hint>
 
     <hint name="frame_real_draw">
+        <res name="cpu_min_c1">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="gpu_dvfs_margin">1</res>
+        <res name="gpu_dvfs_step">1</res>
+        <res name="dram_min">-1</res>
         <int name="duration_ms">100</int>
     </hint>
 
     <hint name="frame_obtain_view">
-        <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
         <int name="duration_ms">100</int>
     </hint>
 
@@ -72,6 +156,109 @@
         <int name="duration_ms">100</int>
     </hint>
 
+    <hint name="frame_pre_anim">
+        <res name="cpu_min_c1">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="gpu_dvfs_margin">1</res>
+        <res name="gpu_dvfs_step">1</res>
+        <res name="uclamp_fg">60</res>
+        <int name="duration_ms">100</int>
+    </hint>
+
+    <hint name="frame_request_vsync">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">50</int>
+    </hint>
+
+    <hint name="frame_draw">
+        <res name="cpu_min_c1">-1</res>
+        <int name="duration_ms">50</int>
+    </hint>
+
+    <hint name="frame_draw_step">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">50</int>
+    </hint>
+
+    <!-- ================================================================== -->
+    <!-- TRANSITIONS / ANIMATIONS                                            -->
+    <!-- ================================================================== -->
+
+    <hint name="transition">
+        <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="dram_min">-1</res>
+        <res name="uclamp_fg">50</res>
+        <res name="uclamp_top">50</res>
+        <res name="uclamp_fg_max">100</res>
+        <res name="uclamp_top_lat">1</res>
+        <res name="pmqos_cpu_dma_latency">44</res>
+        <int name="duration_ms">1000</int>
+    </hint>
+
+    <hint name="transition_lite">
+        <res name="dram_min">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="uclamp_fg">40</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <hint name="activity_transition">
+        <res name="cpu_max_c0">1</res>
+        <res name="cpu_max_c1">1</res>
+        <res name="dram_min">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="gpu_dvfs_margin">1</res>
+        <res name="gpu_dvfs_step">1</res>
+        <res name="uclamp_fg">50</res>
+        <res name="uclamp_top">50</res>
+        <res name="uclamp_fg_max">100</res>
+        <int name="duration_ms">400</int>
+    </hint>
+
+    <hint name="activity_exit">
+        <res name="cpu_min_c1">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="gpu_dvfs_margin">1</res>
+        <res name="gpu_dvfs_step">1</res>
+        <res name="dram_min">-1</res>
+        <int name="duration_ms">400</int>
+    </hint>
+
+    <hint name="rotation_latency">
+        <res name="pmqos_cpu_dma_latency">44</res>
+        <res name="uclamp_top">70</res>
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <hint name="rotation_anim">
+        <res name="cpu_max_c0">1</res>
+        <res name="cpu_max_c1">1</res>
+        <res name="dram_min">-1</res>
+        <res name="gpu_boost">1</res>
+        <int name="duration_ms">600</int>
+    </hint>
+
+    <!-- ================================================================== -->
+    <!-- SYSTEM UI                                                           -->
+    <!-- ================================================================== -->
+
+    <hint name="shade">
+        <res name="cpuset_svp">1</res>
+        <res name="cpuset_sysui">1</res>
+        <res name="cpuset_top">1</res>
+        <res name="gpu_boost">1</res>
+        <res name="dram_min">-1</res>
+        <res name="uclamp_fg">70</res>
+        <res name="uclamp_top">80</res>
+    </hint>
+
+    <!-- ================================================================== -->
+    <!-- IME                                                                 -->
+    <!-- ================================================================== -->
+
     <hint name="ime_show_hide">
         <res name="cpu_min_c0">-1</res>
         <int name="duration_ms">200</int>
@@ -79,6 +266,337 @@
 
     <hint name="ime_init">
         <res name="cpu_min_c0">-1</res>
+        <res name="dram_min">-1</res>
         <int name="duration_ms">200</int>
     </hint>
+
+    <hint name="ime_launch">
+        <res name="cpu_min_c0">-1</res>
+        <res name="dram_min">-1</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <!-- ================================================================== -->
+    <!-- TOUCH / DRAG                                                        -->
+    <!-- ================================================================== -->
+
+    <hint name="touch_boost">
+        <res name="cpu_min_c0">-1</res>
+        <res name="uclamp_fg">30</res>
+        <int name="duration_ms">100</int>
+    </hint>
+
+    <hint name="tap_event">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">80</int>
+    </hint>
+
+    <hint name="drag">
+        <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="uclamp_fg">50</res>
+        <res name="gpu_boost">1</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <hint name="drag_start">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">100</int>
+    </hint>
+
+    <!-- ================================================================== -->
+    <!-- GPU / RENDERING MODES                                               -->
+    <!-- ================================================================== -->
+
+    <hint name="gpu">
+        <res name="gpu_boost">1</res>
+    </hint>
+
+    <hint name="early_wakeup">
+        <res name="gpu_boost">1</res>
+        <res name="dram_min">-1</res>
+        <res name="uclamp_fg">70</res>
+        <res name="uclamp_top">70</res>
+        <res name="uclamp_fg_max">100</res>
+        <res name="uclamp_top_lat">1</res>
+        <res name="pmqos_cpu_dma_latency">44</res>
+        <res name="gpu_dvfs_margin">1</res>
+        <res name="gpu_dvfs_step">1</res>
+        <res name="cci_freq">1</res>
+        <res name="cpu_max_c1">1</res>
+        <int name="duration_ms">1000</int>
+    </hint>
+
+    <hint name="expensive_rendering">
+        <res name="gpu_boost">1</res>
+        <res name="dram_min">-1</res>
+        <res name="uclamp_fg">70</res>
+        <res name="uclamp_top">70</res>
+        <res name="uclamp_fg_max">100</res>
+        <res name="gpu_dvfs_margin">1</res>
+        <res name="gpu_dvfs_step">1</res>
+        <res name="pmqos_cpu_dma_latency">44</res>
+        <int name="duration_ms">0</int>
+    </hint>
+
+    <!-- ================================================================== -->
+    <!-- GAME                                                                -->
+    <!-- ================================================================== -->
+
+    <hint name="game">
+        <res name="gpu_boost">1</res>
+        <res name="dram_min">-1</res>
+        <res name="uclamp_top">70</res>
+    </hint>
+
+    <!-- ================================================================== -->
+    <!-- SUSTAINED / SCENARIO MODES                                          -->
+    <!-- ================================================================== -->
+
+    <hint name="performance_mode">
+        <res name="cpu_min_c1">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="dram_min">-1</res>
+        <res name="uclamp_top">70</res>
+        <int name="duration_ms">0</int>
+    </hint>
+
+    <hint name="scenario_gpu">
+        <res name="gpu_boost">1</res>
+        <res name="dram_min">-1</res>
+        <int name="duration_ms">0</int>
+    </hint>
+
+    <hint name="scenario_cpu">
+        <res name="cpu_min_c1">-1</res>
+        <int name="duration_ms">0</int>
+    </hint>
+
+    <hint name="scenario_cpu_gpu">
+        <res name="cpu_min_c1">-1</res>
+        <res name="gpu_boost">1</res>
+        <res name="dram_min">-1</res>
+        <int name="duration_ms">0</int>
+    </hint>
+
+    <hint name="scenario_cpu_aggressive">
+        <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="cpu_max_c0">1</res>
+        <res name="cpu_max_c1">1</res>
+        <int name="duration_ms">0</int>
+    </hint>
+
+    <!-- ================================================================== -->
+    <!-- MISC SYSTEM HINTS                                                   -->
+    <!-- ================================================================== -->
+
+    <hint name="activity_boost">
+        <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <res name="dram_min">-1</res>
+        <int name="duration_ms">500</int>
+    </hint>
+
+    <hint name="package_install_boost">
+        <res name="cpu_min_c0">-1</res>
+        <res name="cpu_min_c1">-1</res>
+        <int name="duration_ms">2000</int>
+    </hint>
+
+    <hint name="pkg_install">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">1000</int>
+    </hint>
+
+    <hint name="pkg_uninstall">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">500</int>
+    </hint>
+
+    <hint name="app_update">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">1000</int>
+    </hint>
+
+    <hint name="bindapp">
+        <res name="cpu_min_c0">-1</res>
+        <res name="dram_min">-1</res>
+        <int name="duration_ms">300</int>
+    </hint>
+
+    <hint name="kill">
+        <int name="duration_ms">200</int>
+    </hint>
+
+    <hint name="first_draw">
+        <res name="cpu_min_c0">-1</res>
+        <res name="dram_min">-1</res>
+        <int name="duration_ms">200</int>
+    </hint>
+
+    <hint name="mtp_boost">
+        <res name="cpu_min_c0">-1</res>
+        <int name="duration_ms">1000</int>
+    </hint>
+
+    <!-- ================================================================== -->
+    <!-- UX THREAD ROLES                                                     -->
+    <!-- ================================================================== -->
+
+    <ux_threads>
+        <role name="rt"          uclamp_min="512" uclamp_max="1024"/>
+        <role name="ui"          uclamp_min="384" uclamp_max="1024"/>
+        <role name="render"      uclamp_min="512" uclamp_max="1024"/>
+        <role name="gl"          uclamp_min="384" uclamp_max="900"/>
+        <role name="hwui_task"   uclamp_min="256" uclamp_max="800"/>
+        <role name="binder_pool" uclamp_min="200" uclamp_max="700"/>
+    </ux_threads>
+
+    <!-- ================================================================== -->
+    <!-- ATMC: Adaptive Thermal Management Control                           -->
+    <!-- ================================================================== -->
+
+    <atmc>
+        <cpu_levels>
+            <level id="1"  little="500,2000" big="650,2600"/>
+            <level id="2"  little="500,2000" big="650,2600"/>
+            <level id="3"  little="500,2000" big="650,2400"/>
+            <level id="4"  little="500,2000" big="650,2275"/>
+            <level id="5"  little="500,2000" big="650,2275"/>
+            <level id="6"  little="500,2000" big="650,2150"/>
+            <level id="7"  little="500,2000" big="650,2000"/>
+            <level id="8"  little="500,2000" big="650,2000"/>
+            <level id="9"  little="500,2000" big="650,1900"/>
+            <level id="10" little="500,2000" big="650,1800"/>
+            <level id="11" little="500,2000" big="650,1800"/>
+            <level id="12" little="500,2000" big="650,1660"/>
+            <level id="13" little="500,2000" big="650,1540"/>
+            <level id="14" little="500,2000" big="650,1540"/>
+            <level id="15" little="500,2000" big="650,1430"/>
+            <level id="16" little="500,2000" big="650,1300"/>
+            <level id="17" little="500,2000" big="650,1300"/>
+            <level id="18" little="500,2000" big="650,1140"/>
+            <level id="19" little="500,2000" big="650,1040"/>
+            <level id="20" little="500,2000" big="650,1040"/>
+            <level id="21" little="500,2000" big="650,910"/>
+            <level id="22" little="500,2000" big="650,740"/>
+            <level id="23" little="500,2000" big="650,740"/>
+            <level id="24" little="500,2000" big="650,650"/>
+            <level id="25" little="500,2000" big="650,650"/>
+            <level id="26" little="500,2000" big="650,650"/>
+            <level id="27" little="500,2000" big="650,650"/>
+        </cpu_levels>
+
+        <gpu_levels>
+            <level id="1"  min="8" max="0"/>
+            <level id="2"  min="8" max="1"/>
+            <level id="3"  min="8" max="2"/>
+            <level id="4"  min="8" max="3"/>
+            <level id="5"  min="8" max="4"/>
+            <level id="6"  min="8" max="5"/>
+            <level id="7"  min="8" max="6"/>
+            <level id="8"  min="8" max="6"/>
+            <level id="9"  min="8" max="7"/>
+            <level id="10" min="8" max="7"/>
+            <level id="11" min="8" max="8"/>
+        </gpu_levels>
+
+        <boost_scenarios>
+            <scenario id="1" name="ALL_BOOST"    params="1086324736,1"/>
+            <scenario id="2" name="TOPAPP_BOOST" params="1086324736,2"/>
+        </boost_scenarios>
+
+        <scenes>
+            <scene name="default_scene">
+                <level id="5"><action unit="cpu" status="12"/></level>
+                <level id="8"><action unit="cpu" status="13"/></level>
+                <level id="9">
+                    <action unit="cpu" status="14"/>
+                    <action unit="dexopt" status="1"/>
+                </level>
+                <level id="10">
+                    <action unit="cpu" status="16"/>
+                    <action unit="bg_killer" status="3"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="19"/>
+                    <action unit="bg_killer" status="4"/>
+                </level>
+            </scene>
+
+            <scene name="game">
+                <level id="5"><action unit="cpu" status="8"/></level>
+                <level id="8"><action unit="cpu" status="9"/></level>
+                <level id="9"><action unit="cpu" status="10"/></level>
+                <level id="10"><action unit="cpu" status="17"/></level>
+                <level id="11">
+                    <action unit="gpu" status="7"/>
+                    <action unit="cpu" status="20"/>
+                </level>
+                <level id="12"><action unit="gpu" status="10"/></level>
+            </scene>
+
+            <scene name="heating_fgs">
+                <level id="5"><action unit="cpu" status="20"/></level>
+                <level id="7"><action unit="cpu" status="22"/></level>
+                <level id="10"><action unit="cpu" status="24"/></level>
+            </scene>
+
+            <scene name="axcamera_photo_preview">
+                <level id="7"><action unit="cpu" status="9"/></level>
+                <level id="8"><action unit="cpu" status="11"/></level>
+                <level id="9"><action unit="cpu" status="13"/></level>
+                <level id="10"><action unit="cpu" status="16"/></level>
+                <level id="11"><action unit="cpu" status="21"/></level>
+                <level id="12"><action unit="cpu" status="23"/></level>
+            </scene>
+        </scenes>
+
+        <apps>
+            <app pkgs="com.antutu.ABenchMark,com.andromeda.androbench2,com.antutu.benchmark.full,com.primatelabs.geekbench5.corporate,com.primatelabs.geekbench5,com.primatelabs.geekbench4.corporate,com.primatelabs.geekbench6.corporate,com.primatelabs.geekbench6,net.kishonti.gfxbench.v50000.corporate">
+                <level id="5"><action unit="cpu" status="0"/></level>
+                <level id="13"><action unit="cpu" status="21"/></level>
+                <level id="14"><action unit="cpu" status="24"/></level>
+            </app>
+            <app pkgs="com.futuremark.dmandroid.application">
+                <level id="5"><action unit="cpu" status="0"/></level>
+                <level id="12"><action unit="gpu" status="8"/></level>
+                <level id="14"><action unit="gpu" status="10"/></level>
+            </app>
+            <app pkgs="skynet.cputhrottlingtest">
+                <level id="12"><action unit="cpu" status="20"/></level>
+                <level id="13"><action unit="cpu" status="21"/></level>
+                <level id="14"><action unit="cpu" status="24"/></level>
+            </app>
+            <app pkgs="com.instagram.android,com.facebook.mlite,com.whatsApp,com.google.android.apps.tachyon,com.snapchat.android,us.zoom.videomeetings,com.tencent.wemeet.app,com.ss.android.lark,com.microsoft.teams">
+                <level id="4"><action unit="cpu" status="14"/></level>
+                <level id="5"><action unit="cpu" status="15"/></level>
+                <level id="6"><action unit="cpu" status="16"/></level>
+                <level id="7"><action unit="cpu" status="19"/></level>
+            </app>
+            <app pkgs="com.google.android.apps.maps,com.autonavi.minimap,com.waze,ru.yandex.yandexmaps,org.rajman.neshan.traffic.tehran.navigator,ru.dublgis.dgismobile,de.blitzer,com.baidu.BaiduMap">
+                <level id="7"><action unit="cpu" status="15"/></level>
+                <level id="8"><action unit="cpu" status="17"/></level>
+                <level id="9"><action unit="cpu" status="21"/></level>
+                <level id="10"><action unit="cpu" status="22"/></level>
+            </app>
+            <app pkgs="com.pubg.imobile,com.tencent.ig,com.tencent.igfit">
+                <level id="5"><action unit="cpu" status="0"/></level>
+                <level id="7"><action unit="cpu" status="4"/></level>
+                <level id="8"><action unit="cpu" status="7"/></level>
+                <level id="9"><action unit="cpu" status="11"/></level>
+                <level id="10"><action unit="cpu" status="14"/></level>
+                <level id="11"><action unit="cpu" status="20"/></level>
+            </app>
+            <app pkgs="com.HoYoverse.hkrpgoversea,com.miHoYo.Yuanshen,com.miHoYo.GenshinImpact,com.netmarble.sololv">
+                <level id="5"><action unit="cpu" status="8"/></level>
+                <level id="8"><action unit="cpu" status="9"/></level>
+                <level id="9"><action unit="cpu" status="10"/></level>
+                <level id="10"><action unit="cpu" status="12"/></level>
+                <level id="11"><action unit="cpu" status="18"/></level>
+            </app>
+        </apps>
+    </atmc>
+
 </perf-config>
