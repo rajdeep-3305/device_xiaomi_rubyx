@@ -6,12 +6,12 @@
     <!-- ================================================================== -->
 
     <path name="gpu_dvfs_margin">/sys/kernel/ged/hal/timer_base_dvfs_margin</path>
-    <int name="gpu_dvfs_margin_boost">50</int>
-    <int name="gpu_dvfs_margin_default">30</int>
+    <int name="gpu_dvfs_margin_boost">75</int>
+    <int name="gpu_dvfs_margin_default">50</int>
 
     <path name="gpu_dvfs_step">/sys/kernel/ged/hal/loading_base_dvfs_step</path>
     <int name="gpu_dvfs_step_boost">16</int>
-    <int name="gpu_dvfs_step_default">103</int>
+    <int name="gpu_dvfs_step_default">4</int>
 
     <path name="gpu_boost_level">/sys/kernel/ged/hal/gpu_boost_level</path>
     <path name="gpu_custom_boost_freq">/sys/kernel/ged/hal/custom_boost_gpu_freq</path>
@@ -36,9 +36,9 @@
         <res name="dram_min">-1</res>
         <res name="cpuset_svp">1</res>
         <res name="uclamp_fg">70</res>
-        <res name="uclamp_top">70</res>
+        <res name="uclamp_top">80</res>
         <res name="rr_fling">1</res>
-        <int name="duration_ms">500</int>
+        <int name="duration_ms">2000</int>
     </hint>
 
     <hint name="first_launch">
@@ -253,6 +253,7 @@
         <res name="dram_min">-1</res>
         <res name="uclamp_fg">70</res>
         <res name="uclamp_top">80</res>
+        <int name="duration_ms">1500</int>
     </hint>
 
     <!-- ================================================================== -->
@@ -333,6 +334,8 @@
         <res name="uclamp_fg">70</res>
         <res name="uclamp_top">70</res>
         <res name="uclamp_fg_max">100</res>
+        <res name="uclamp_top_lat">1</res>
+        <res name="cci_freq">1</res>
         <res name="gpu_dvfs_margin">1</res>
         <res name="gpu_dvfs_step">1</res>
         <res name="pmqos_cpu_dma_latency">44</res>
@@ -346,7 +349,12 @@
     <hint name="game">
         <res name="gpu_boost">1</res>
         <res name="dram_min">-1</res>
+        <res name="uclamp_fg">60</res>
         <res name="uclamp_top">70</res>
+        <res name="uclamp_top_lat">1</res>
+        <res name="cci_freq">1</res>
+        <res name="pmqos_cpu_dma_latency">44</res>
+        <int name="duration_ms">0</int>
     </hint>
 
     <!-- ================================================================== -->
@@ -357,6 +365,7 @@
         <res name="cpu_min_c1">-1</res>
         <res name="gpu_boost">1</res>
         <res name="dram_min">-1</res>
+        <res name="uclamp_fg">60</res>
         <res name="uclamp_top">70</res>
         <int name="duration_ms">0</int>
     </hint>
@@ -461,31 +470,31 @@
         <cpu_levels>
             <level id="1"  little="500,2000" big="650,2600"/>
             <level id="2"  little="500,2000" big="650,2600"/>
-            <level id="3"  little="500,2000" big="650,2400"/>
-            <level id="4"  little="500,2000" big="650,2275"/>
-            <level id="5"  little="500,2000" big="650,2275"/>
-            <level id="6"  little="500,2000" big="650,2150"/>
-            <level id="7"  little="500,2000" big="650,2000"/>
-            <level id="8"  little="500,2000" big="650,2000"/>
-            <level id="9"  little="500,2000" big="650,1900"/>
-            <level id="10" little="500,2000" big="650,1800"/>
-            <level id="11" little="500,2000" big="650,1800"/>
-            <level id="12" little="500,2000" big="650,1660"/>
-            <level id="13" little="500,2000" big="650,1540"/>
-            <level id="14" little="500,2000" big="650,1540"/>
-            <level id="15" little="500,2000" big="650,1430"/>
-            <level id="16" little="500,2000" big="650,1300"/>
-            <level id="17" little="500,2000" big="650,1300"/>
-            <level id="18" little="500,2000" big="650,1140"/>
-            <level id="19" little="500,2000" big="650,1040"/>
-            <level id="20" little="500,2000" big="650,1040"/>
-            <level id="21" little="500,2000" big="650,910"/>
-            <level id="22" little="500,2000" big="650,740"/>
-            <level id="23" little="500,2000" big="650,740"/>
-            <level id="24" little="500,2000" big="650,650"/>
-            <level id="25" little="500,2000" big="650,650"/>
-            <level id="26" little="500,2000" big="650,650"/>
-            <level id="27" little="500,2000" big="650,650"/>
+            <level id="3"  little="500,1903" big="650,2400"/>
+            <level id="4"  little="500,1800" big="650,2275"/>
+            <level id="5"  little="500,1800" big="650,2275"/>
+            <level id="6"  little="500,1703" big="650,2150"/>
+            <level id="7"  little="500,1600" big="650,2000"/>
+            <level id="8"  little="500,1600" big="650,2000"/>
+            <level id="9"  little="500,1503" big="650,1900"/>
+            <level id="10" little="500,1407" big="650,1800"/>
+            <level id="11" little="500,1407" big="650,1800"/>
+            <level id="12" little="500,1310" big="650,1660"/>
+            <level id="13" little="500,1260" big="650,1540"/>
+            <level id="14" little="500,1260" big="650,1540"/>
+            <level id="15" little="500,1150" big="650,1430"/>
+            <level id="16" little="500,1053" big="650,1300"/>
+            <level id="17" little="500,1053" big="650,1300"/>
+            <level id="18" little="500,980" big="650,1140"/>
+            <level id="19" little="500,900" big="650,1040"/>
+            <level id="20" little="500,900" big="650,1040"/>
+            <level id="21" little="500,740" big="650,910"/>
+            <level id="22" little="500,650" big="650,740"/>
+            <level id="23" little="500,650" big="650,740"/>
+            <level id="24" little="500,500" big="650,650"/>
+            <level id="25" little="500,500" big="650,650"/>
+            <level id="26" little="500,500" big="650,650"/>
+            <level id="27" little="500,500" big="650,650"/>
         </cpu_levels>
 
         <gpu_levels>
@@ -550,6 +559,8 @@
                 <level id="10"><action unit="cpu" status="16"/></level>
                 <level id="11"><action unit="cpu" status="21"/></level>
                 <level id="12"><action unit="cpu" status="23"/></level>
+                <level id="13"><action unit="cpu" status="24"/></level>
+                <level id="14"><action unit="cpu" status="25"/></level>
             </scene>
         </scenes>
 
@@ -569,7 +580,7 @@
                 <level id="13"><action unit="cpu" status="21"/></level>
                 <level id="14"><action unit="cpu" status="24"/></level>
             </app>
-            <app pkgs="com.instagram.android,com.facebook.mlite,com.whatsApp,com.google.android.apps.tachyon,com.snapchat.android,us.zoom.videomeetings,com.tencent.wemeet.app,com.ss.android.lark,com.microsoft.teams">
+            <app pkgs="com.instagram.android,com.facebook.mlite,com.whatsapp,com.google.android.apps.tachyon,com.snapchat.android,us.zoom.videomeetings,com.tencent.wemeet.app,com.ss.android.lark,com.microsoft.teams">
                 <level id="4"><action unit="cpu" status="14"/></level>
                 <level id="5"><action unit="cpu" status="15"/></level>
                 <level id="6"><action unit="cpu" status="16"/></level>
