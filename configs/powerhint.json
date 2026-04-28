@@ -44,7 +44,7 @@
         "75",
         "100"
       ],
-      "DefaultIndex": 2,
+      "DefaultIndex": 1,
       "ResetOnInit": true
     },
     {
@@ -158,7 +158,7 @@
         "1",
         "0"
       ],
-      "DefaultIndex": 0,
+      "DefaultIndex": 1,
       "ResetOnInit": true
     },
     {
@@ -223,6 +223,12 @@
     },
     {
       "PowerHint": "INTERACTION",
+      "Node": "DRAMOppMin",
+      "Duration": 600,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "INTERACTION",
       "Node": "GPUBlockBoost",
       "Duration": 600,
       "Value": "50"
@@ -238,6 +244,12 @@
       "Node": "GPUDVFSPeriod",
       "Duration": 600,
       "Value": "50"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "MaliJSCtxMode",
+      "Duration": 600,
+      "Value": "0"
     },
     {
       "PowerHint": "INTERACTION",
