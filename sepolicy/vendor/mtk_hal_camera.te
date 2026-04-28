@@ -15,3 +15,4 @@ set_prop(mtk_hal_camera, vendor_camera_prop)
 
 # Allow camera HAL to access fpsgo sysfs nodes for frame rate optimization
 allow mtk_hal_camera sysfs_fpsgo:dir search;
+allow mtk_hal_camera sysfs_fpsgo:file rw_file_perms;
