@@ -1,4 +1,4 @@
-# Unpinned blobs from ruby-user 14 UP1A.230620.001 OS2.0.11.0.UMOMIXM release-keys
+# Unpinned blobs from ruby-user 14 UP1A.230620.001 OS2.0.12.0.UMOMIXM release-keys
 
 # Audio
 vendor/etc/smartpa_param/AW_DSP.bin
