@@ -94,6 +94,13 @@ on enable-low-power
     write /sys/kernel/ged/hal/timer_base_dvfs_margin 50
     write /sys/kernel/ged/hal/custom_upbound_gpu_freq 0
     write /sys/kernel/ged/hal/custom_boost_gpu_freq 0
+    write /sys/module/ged/parameters/gpu_cust_boost_freq 0
+    write /sys/module/ged/parameters/boost_amp 0
+    write /sys/module/ged/parameters/deboost_reduce 0
+    write /sys/module/ged/parameters/ged_smart_boost 1
+
+    # FBT CPU boost
+    write /sys/module/fbt_cpu/parameters/uboost_enhance_f 25
 
     # FPSGO tuning
     write /sys/kernel/fpsgo/common/fpsgo_enable 1
