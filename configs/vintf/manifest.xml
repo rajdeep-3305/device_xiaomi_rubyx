@@ -48,10 +48,6 @@
         <transport>hwbinder</transport>
         <fqname>@4.1::IKeymasterDevice/default</fqname>
     </hal>
-    <hal override="true">
-        <name>android.hardware.nfc</name>
-        <transport>hwbinder</transport>
-    </hal>
     <hal format="hidl">
         <name>android.hardware.radio</name>
         <transport>hwbinder</transport>
@@ -121,6 +117,11 @@
         <name>vendor.mediatek.hardware.apuware.xrp</name>
         <transport>hwbinder</transport>
         <fqname>@2.0::INeuronXrp/default</fqname>
+    </hal>
+        <hal format="hidl">
+        <name>vendor.mediatek.hardware.bluetooth.audio</name>
+        <transport>hwbinder</transport>
+        <fqname>@2.2::IBluetoothAudioProvidersFactory/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.mediatek.hardware.camera.atms</name>
