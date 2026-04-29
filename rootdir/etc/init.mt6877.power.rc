@@ -35,7 +35,7 @@ on init
 
     # update cpus for cpuset cgroup
     write /dev/cpuset/top-app/cpus 0-7
-    write /dev/cpuset/foreground/cpus 0-2,4-7
+    write /dev/cpuset/foreground/cpus 0-7
     write /dev/cpuset/background/cpus 0-2
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/restricted/cpus 0-3
@@ -82,6 +82,10 @@ on enable-low-power
     write /proc/sys/kernel/sched_migration_cost_ns 200000
     write /proc/sys/kernel/sched_util_clamp_max 1024
 
+    # Reclaim tuning
+    write /proc/sys/vm/watermark_scale_factor 10
+    write /proc/sys/vm/vfs_cache_pressure 100
+
     # Enable big task rotation
     write /proc/perfmgr/boost_ctrl/eas_ctrl/sched_big_task_rotation 1
 
@@ -89,6 +93,7 @@ on enable-low-power
     write /sys/kernel/ged/hal/dvfs_margin_value 130
     write /sys/kernel/ged/hal/timer_base_dvfs_margin 50
     write /sys/kernel/ged/hal/custom_upbound_gpu_freq 0
+    write /sys/kernel/ged/hal/custom_boost_gpu_freq 0
 
     # FPSGO tuning
     write /sys/kernel/fpsgo/common/fpsgo_enable 1
@@ -155,6 +160,10 @@ on enable-low-power
     write /dev/cpuctl/dex2oat/cpu.uclamp.max 60
     write /dev/cpuctl/dex2oat/cpu.uclamp.min 0
     write /dev/cpuctl/dex2oat/cpu.shares 512
+
+    # Force SurfaceFlinger uclamp floor
+    write /dev/cpuctl/system/cpu.uclamp.min 512
+    write /dev/cpuctl/system/cpu.uclamp.max 768
 
     # Enable PowerHAL hint processing
     setprop vendor.powerhal.init 1

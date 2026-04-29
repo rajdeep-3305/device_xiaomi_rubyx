@@ -898,7 +898,7 @@ on boot
     chmod 0664 /dev/cpu_dma_latency
 
     # Adjust watermark level
-    write /proc/sys/vm/watermark_scale_factor 100
+    write /proc/sys/vm/watermark_scale_factor 10
     
     # sched
     write /proc/sys/kernel/sched_latency_ns 8000000
@@ -907,7 +907,7 @@ on boot
     write /proc/sys/kernel/sched_util_clamp_min 0
 
     # memory reserve tuning
-    write /proc/sys/vm/vfs_cache_pressure 50
+    write /proc/sys/vm/vfs_cache_pressure 100
     write /proc/sys/vm/min_free_kbytes 27386
     write /proc/sys/vm/lowmem_reserve_ratio "256 256 32"
 
