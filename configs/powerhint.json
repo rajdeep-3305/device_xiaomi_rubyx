@@ -61,7 +61,7 @@
       "Name": "GPUDVFSMargin",
       "Path": "/sys/kernel/ged/hal/timer_base_dvfs_margin",
       "Values": [
-        "18743356",
+        "75",
         "45",
         "50",
         "60"
@@ -73,7 +73,7 @@
       "Name": "GPUDVFSLoadingStep",
       "Path": "/sys/kernel/ged/hal/loading_base_dvfs_step",
       "Values": [
-        "771",
+        "16",
         "15",
         "4",
         "0"
@@ -309,13 +309,13 @@
       "PowerHint": "LAUNCH",
       "Node": "GPUDVFSMargin",
       "Duration": 2000,
-      "Value": "18743356"
+      "Value": "75"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "GPUDVFSLoadingStep",
       "Duration": 2000,
-      "Value": "771"
+      "Value": "16"
     },
     {
       "PowerHint": "LAUNCH",
