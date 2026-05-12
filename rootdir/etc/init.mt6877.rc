@@ -22,6 +22,8 @@ on init
     chown system system /dev/cpuctl/top-app/cpu.uclamp.min
     chmod 0664 /dev/cpuctl/foreground/cpu.uclamp.min
     chown system system /dev/cpuctl/foreground/cpu.uclamp.min
+    chmod 0664 /dev/cpuctl/camera-daemon/cpu.uclamp.min
+    chown system system /dev/cpuctl/camera-daemon/cpu.uclamp.min
 
     # Assign reasonable ceiling values for socket rcv/snd buffers
     write /proc/sys/net/core/rmem_max  8388608
@@ -894,6 +896,10 @@ on boot
     # PMQoS
     chown system system /dev/cpu_dma_latency
     chmod 0664 /dev/cpu_dma_latency
+
+    # CCI mode
+    chown system system /proc/cpufreq/cpufreq_cci_mode
+    chmod 0664 /proc/cpufreq/cpufreq_cci_mode
 
     # Adjust watermark level
     write /proc/sys/vm/watermark_scale_factor 10
