@@ -857,8 +857,6 @@ on property:sys.boot_completed=1
     chmod 440 /proc/net/unix
 
 on boot
-    # FPSGO FBT Game
-    insmod /vendor/lib/modules/fpsgo.ko
 
     # Allow PowerHAL to control CPU frequency limits
     chown system system /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq

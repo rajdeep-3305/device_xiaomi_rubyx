@@ -86,9 +86,6 @@ on enable-low-power
     write /proc/sys/vm/watermark_scale_factor 10
     write /proc/sys/vm/vfs_cache_pressure 100
 
-    # Enable big task rotation
-    write /proc/perfmgr/boost_ctrl/eas_ctrl/sched_big_task_rotation 1
-
     # GED tuning
     write /sys/kernel/ged/hal/dvfs_margin_value 130
     write /sys/kernel/ged/hal/timer_base_dvfs_margin 50
@@ -98,18 +95,6 @@ on enable-low-power
     write /sys/module/ged/parameters/boost_amp 0
     write /sys/module/ged/parameters/deboost_reduce 0
     write /sys/module/ged/parameters/ged_smart_boost 1
-
-    # FBT CPU boost
-    write /sys/module/fbt_cpu/parameters/uboost_enhance_f 25
-
-    # FPSGO tuning
-    write /sys/kernel/fpsgo/common/fpsgo_enable 1
-    write /sys/kernel/fpsgo/fbt/boost_ta 1
-    write /sys/kernel/fpsgo/common/stop_boost 0
-    write /sys/kernel/fpsgo/fbt/enable_switch_sync_flag 1
-    write /sys/kernel/fpsgo/fbt/enable_switch_cap_margin 1
-    write /sys/kernel/fpsgo/fbt/ultra_rescue 1
-    write /sys/kernel/fpsgo/fstb/margin_mode 2
 
     # Utilization Clamping
     # Tuning
