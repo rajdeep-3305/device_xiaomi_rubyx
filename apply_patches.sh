@@ -75,18 +75,15 @@ apply_patch_dir "external/wpa_supplicant_8"
 # 2. frameworks/av
 apply_patch_dir "frameworks/av"
 
-# 3. frameworks/base
-apply_patch_dir "frameworks/base"
-
-# 4. system/core [miuicamera]
+# 3. system/core [miuicamera]
 apply_patch_dir "system/core"
 
 # ── bpf: Android 16 QPR2 BPF patches for 4.19 kernel ──────────────────────────
 
-# 5. packages/modules/DnsResolver
+# 4. packages/modules/DnsResolver
 apply_patch_dir "packages/modules/DnsResolver"
 
-# 6. system/apex
+# 5. system/apex
 apply_patch_dir "system/apex"
 
 echo ""
