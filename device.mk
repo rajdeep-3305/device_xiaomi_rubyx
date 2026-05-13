@@ -74,10 +74,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml
 
-# AxBurstengine
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/axion/ax_perf_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/ax_perf_config.xml
-
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2400
 TARGET_SCREEN_WIDTH := 1080
@@ -433,4 +429,3 @@ TARGET_DOZE_DOUBLE_TAP_PULSE_SUPPORTED := true
 TARGET_DOZE_PICKUP_PULSE_SUPPORTED := true
 TARGET_DOZE_SIDE_FPS_PULSE_SUPPORTED := true
 TARGET_SUPPORTED_REFRESH_RATES := 60,120
-TARGET_DISABLES_LIBPERF := true
