@@ -117,6 +117,7 @@
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
         <MediaCodec name="c2.mtk.av1.decoder.secure" type="video/av01" >
+            <Alias name="OMX.MTK.VIDEO.DECODER.AV1.secure" />
             <Limit name="size" min="16x16" max="1920x1088" />
             <Quirk name="wants-NAL-fragments" />
             <Feature name="secure-playback" required="true" />
