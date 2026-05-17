@@ -148,10 +148,10 @@ on enable-low-power
     write /dev/cpuctl/camera-daemon/cpu.shares 20480
 
     # Dex2Oat
-    write /dev/cpuctl/dex2oat/cpu.uclamp.latency_sensitive 0
-    write /dev/cpuctl/dex2oat/cpu.uclamp.max 60
+    write /dev/cpuctl/dex2oat/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/dex2oat/cpu.uclamp.max max
     write /dev/cpuctl/dex2oat/cpu.uclamp.min 0
-    write /dev/cpuctl/dex2oat/cpu.shares 512
+    write /dev/cpuctl/dex2oat/cpu.shares 1024
 
     # Force SurfaceFlinger uclamp floor
     write /dev/cpuctl/system/cpu.uclamp.min 512
