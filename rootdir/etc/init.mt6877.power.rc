@@ -154,7 +154,7 @@ on enable-low-power
     write /dev/cpuctl/dex2oat/cpu.shares 1024
 
     # Force SurfaceFlinger uclamp floor
-    write /dev/cpuctl/system/cpu.uclamp.min 512
+    write /dev/cpuctl/system/cpu.uclamp.min 128
     write /dev/cpuctl/system/cpu.uclamp.max 768
 
     # Enable PowerHAL hint processing
