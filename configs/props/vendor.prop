@@ -89,6 +89,7 @@ pm.dexopt.first-boot=verify
 
 # Display
 debug.mediatek.appgamepq_compress=1
+debug.renderengine.blur_algorithm=kawase2
 debug.sf.auto_latch_unsignaled=false
 debug.sf.enable_gl_backpressure=0
 debug.sf.enable_hwc_vds=0
