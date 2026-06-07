@@ -34,7 +34,7 @@
 
     <!-- If not empty, sets the AVC codec profile level used for the internal screen recorder.
          Possible values: 3, 3.1, 3.2, 4, 4.1, 4.2 -->
-    <string name="config_screenRecorderAVCProfileLevel" translatable="false">3.1</string>
+    <string name="config_screenRecorderAVCProfileLevel">3.1</string>
 
     <!-- Type of a sensor that provides a low-power estimate of the desired display
          brightness, suitable to listen to while the device is asleep (e.g. during
