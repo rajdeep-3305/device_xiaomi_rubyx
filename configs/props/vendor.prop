@@ -167,14 +167,18 @@ ro.hardware.gatekeeper=beanpod
 
 # IMS
 persist.vendor.anr.enhancement=0
-persist.vendor.mtk.ct_volte_support=3
-persist.vendor.mtk.dynamic_ims_switch=1
+persist.vendor.ims_support=1
+persist.vendor.mims_support=2
 persist.vendor.mtk.volte.enable=1
-persist.vendor.mtk.wfc_support=1
+persist.vendor.mtk_dynamic_ims_switch=1
+persist.vendor.mtk_wfc_support=1
+persist.vendor.vilte_support=1
 persist.vendor.viwifi_support=1
 persist.vendor.vonr_setting_support=1
+persist.vendor.wfc.cnop_vowifi=1
 ro.vendor.md_auto_setup_ims=1
 ro.vendor.mtk_data_config=1
+ro.telephony.iwlan_operation_mode=AP-assisted
 
 # Keymaster
 ro.crypto.volume.filenames_mode=aes-256-cts
@@ -252,7 +256,6 @@ persist.vendor.radio.mtk_ps2_rat=N/L/W/G
 persist.vendor.radio.mtk_ps3_rat=G
 persist.vendor.radio.smart.data.switch=1
 ro.telephony.default_network=33,33,33,33
-ro.telephony.iwlan_operation_mode=AP-assisted
 ro.vendor.md_prop_ver=1
 ro.vendor.mtk_c2k_lte_mode=2
 ro.vendor.mtk_c2k_support=1
