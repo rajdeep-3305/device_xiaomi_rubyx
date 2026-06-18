@@ -4,6 +4,9 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
+    <!-- String indicating the package name of the device GbaService implementation. -->
+    <string name="config_gba_package">com.mediatek.gbaservice</string>
+
     <!--
     OEMs that wish to change the below settings must do so via a runtime resource overlay package
     and *NOT* by changing this file. This file is part of the tethering mainline module.
@@ -26,7 +29,4 @@
         <item>ap\\d</item>
         <item>ap_br_ap\\d</item>
     </string-array>
-
-    <!-- String indicating the package name of the device GbaService implementation. -->
-    <string name="config_gba_package" translatable="false">com.mediatek.gbaservice</string>
 </resources>
