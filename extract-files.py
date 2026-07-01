@@ -123,6 +123,7 @@ blob_fixups: blob_fixups_user_type = {
     ('vendor/lib64/libcodec2_mtk_vdec.so',
      'vendor/lib64/libcodec2_mtk_venc.so'): blob_fixup()
         .remove_needed('libcodec2_vpp_dolby_plugin.so')
+        .replace_needed('libformatter.so', 'libformatter_mtk.so')
 }
 
 module = ExtractUtilsModule(
