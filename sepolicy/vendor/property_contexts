@@ -9,6 +9,9 @@ ro.vendor.mtk_cam_stereo_camera_support    u:object_r:vendor_camera_prop:s0
 # Charge
 persist.vendor.accelerate.charge u:object_r:vendor_batterysecret_prop:s0
 
+# Dolby
+vendor.audio.dolby.    u:object_r:vendor_audio_prop:s0
+
 # Fingerprint
 persist.vendor.sys.fp. u:object_r:vendor_fingerprint_prop:s0
 ro.hardware.fp u:object_r:vendor_fingerprint_prop:s0
