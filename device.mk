@@ -391,6 +391,8 @@ PRODUCT_PACKAGES += \
     android.hardware.usb-service.mediatek \
     android.hardware.usb.gadget-service.mediatek
     
+$(call soong_config_set,mediatek_gadget,use_custom_usb_gadget_rc,true)
+
 # Vibrator
 $(call soong_config_set,vibrator,vibratortargets,vibratoraidlV2target)
 
