@@ -428,19 +428,3 @@ $(call soong_config_set_bool,mediatek_wifi_hal,use_pre_u_qpr2_struct,true)
 # Inherit the proprietary files
 $(call inherit-product-if-exists, device/xiaomi/miuicamera-rubyx/device.mk)
 $(call inherit-product, vendor/xiaomi/rubyx/rubyx-vendor.mk)
-
-# Axion Stuff
-PERF_GOV_SUPPORTED := true
-PERF_DEFAULT_GOV := schedutil
-PERF_ANIM_OVERRIDE := true
-TORCH_STR_SUPPORTED := true
-TARGET_NEEDS_DOZE_FIX := true
-TARGET_DOZE_TAP_PULSE_SUPPORTED := true
-TARGET_DOZE_DOUBLE_TAP_PULSE_SUPPORTED := true
-TARGET_DOZE_PICKUP_PULSE_SUPPORTED := true
-TARGET_DOZE_SIDE_FPS_PULSE_SUPPORTED := true
-TARGET_SUPPORTED_REFRESH_RATES := 60,120
-TARGET_TOUCH_BOOST_SUPPORTED := true
-TARGET_ENABLES_IMS_OVERRIDES := true
-TARGET_DISABLES_LIBPERF := false
-TARGET_NEEDS_VULKAN_MEDIA_FIX := true
