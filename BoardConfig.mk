@@ -88,6 +88,7 @@ TARGET_SCREEN_DENSITY := 440
 
 # DTBO
 BOARD_KERNEL_SEPARATED_DTBO := true
+TARGET_DTBO_LIST_WILDCARD := arch/arm64/boot/dts/mediatek/ruby.dtbo
 
 # HIDL
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/vintf/manifest.xml
@@ -123,6 +124,7 @@ BOARD_SUPER_PARTITION_GROUPS := mediatek_dynamic_partitions
 BOARD_MEDIATEK_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product vendor
 BOARD_MEDIATEK_DYNAMIC_PARTITIONS_SIZE := 9122611200 # BOARD_SUPER_PARTITION_SIZE - 4MB
 
+include vendor/lineage/config/BoardConfigKernel.mk
 -include vendor/lineage/config/BoardConfigReservedSize.mk
 
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
