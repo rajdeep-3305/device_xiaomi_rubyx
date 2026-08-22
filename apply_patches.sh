@@ -67,6 +67,15 @@ echo ""
 # 1. system/core [miuicamera]
 apply_patch_dir "system/core"
 
+# 2. system/memory/libdmabufheap [ION fallback for 4.19]
+apply_patch_dir "system/memory/libdmabufheap"
+
+# 3. system/memory/libion [anyapex header]
+apply_patch_dir "system/memory/libion"
+
+# 4. vendor/lineage [soong generator]
+apply_patch_dir "vendor/lineage"
+
 echo ""
 info "========================================="
 info "    All patches applied successfully"

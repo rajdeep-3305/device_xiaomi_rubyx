@@ -1,0 +1,268 @@
+From 4e77ddd513c812d4af770e2681202b3d3cc4dd9c Mon Sep 17 00:00:00 2001
+From: rajdeep-3305 <rajdeepbiswas3305@gmail.com>
+Date: Sat, 22 Aug 2026 14:23:40 +0000
+Subject: [PATCH] libdmabufheap: Restore ION fallback for legacy 4.19 kernels
+
+- Android 17 removed legacy ION support from libdmabufheap.
+- Devices running 4.19 kernels require /dev/ion fallback when
+  /dev/dma_heap/ is unavailable so Gralloc4 can allocate graphics buffers.
+- Add robust C-based ION memory allocator fallback.
+
+Change-Id: I005f9adbcbe4efb672fa1876ca4e41813e7e2936
+Signed-off-by: rajdeep-3305 <rajdeepbiswas3305@gmail.com>
+---
+ Android.bp          |   3 +
+ BufferAllocator.cpp | 150 +++++++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 136 insertions(+), 17 deletions(-)
+
+diff --git a/Android.bp b/Android.bp
+index 317221f..2677db1 100644
+--- a/Android.bp
++++ b/Android.bp
+@@ -51,6 +51,9 @@ cc_library {
+     shared_libs: [
+         "liblog",
+     ],
++    header_libs: [
++        "libion_headers",
++    ],
+     export_static_lib_headers: [
+         "libbase",
+     ],
+diff --git a/BufferAllocator.cpp b/BufferAllocator.cpp
+index f1b5e23..f2bad13 100644
+--- a/BufferAllocator.cpp
++++ b/BufferAllocator.cpp
+@@ -22,20 +22,125 @@
+ #include <fcntl.h>
+ #include <linux/dma-buf.h>
+ #include <linux/dma-heap.h>
++#include <linux/ion.h>
++#include <linux/ion_4.19.h>
+ #include <stdlib.h>
++#include <sys/ioctl.h>
+ #include <sys/types.h>
+ #include <unistd.h>
+ 
+ #include <mutex>
+ #include <shared_mutex>
+ #include <string>
++#include <unordered_map>
+ #include <unordered_set>
++#include <vector>
+ 
+ #include <android-base/logging.h>
+ #include <android-base/unique_fd.h>
+ 
++#include <pthread.h>
++#include <string.h>
++
+ static constexpr char kDmaHeapRoot[] = "/dev/dma_heap/";
+ 
++struct IonHeapEntry {
++    char name[32];
++    uint32_t mask;
++};
++#define MAX_ION_HEAPS 32
++static int g_ion_fd = -1;
++static pthread_mutex_t g_ion_mutex = PTHREAD_MUTEX_INITIALIZER;
++static struct IonHeapEntry g_ion_heaps[MAX_ION_HEAPS];
++static size_t g_num_ion_heaps = 0;
++static bool g_ion_queried = false;
++
++static int GetIonFd() {
++    pthread_mutex_lock(&g_ion_mutex);
++    if (g_ion_fd >= 0) {
++        pthread_mutex_unlock(&g_ion_mutex);
++        return g_ion_fd;
++    }
++    g_ion_fd = TEMP_FAILURE_RETRY(open("/dev/ion", O_RDWR | O_CLOEXEC));
++    if (g_ion_fd < 0) {
++        g_ion_fd = TEMP_FAILURE_RETRY(open("/dev/ion", O_RDONLY | O_CLOEXEC));
++    }
++    if (g_ion_fd >= 0 && !g_ion_queried) {
++        g_ion_queried = true;
++        struct ion_heap_query query = {};
++        if (ioctl(g_ion_fd, ION_IOC_HEAP_QUERY, &query) == 0 && query.cnt > 0) {
++            struct ion_heap_data heaps[MAX_ION_HEAPS];
++            size_t count = query.cnt < MAX_ION_HEAPS ? query.cnt : MAX_ION_HEAPS;
++            query.cnt = count;
++            query.heaps = reinterpret_cast<uintptr_t>(heaps);
++            if (ioctl(g_ion_fd, ION_IOC_HEAP_QUERY, &query) == 0) {
++                for (size_t i = 0; i < count; i++) {
++                    strlcpy(g_ion_heaps[i].name, heaps[i].name, sizeof(g_ion_heaps[i].name));
++                    g_ion_heaps[i].mask = (1u << heaps[i].heap_id);
++                    LOG(INFO) << "Discovered ION heap: " << heaps[i].name << " (id " << heaps[i].heap_id << ")";
++                }
++                g_num_ion_heaps = count;
++            }
++        }
++    }
++    int fd = g_ion_fd;
++    pthread_mutex_unlock(&g_ion_mutex);
++    return fd;
++}
++
++static uint32_t GetHeapMask(const char* name) {
++    pthread_mutex_lock(&g_ion_mutex);
++    for (size_t i = 0; i < g_num_ion_heaps; i++) {
++        if (strcmp(g_ion_heaps[i].name, name) == 0) {
++            uint32_t m = g_ion_heaps[i].mask;
++            pthread_mutex_unlock(&g_ion_mutex);
++            return m;
++        }
++    }
++    pthread_mutex_unlock(&g_ion_mutex);
++    return ~0u;
++}
++
++static int IonAlloc(const std::string& heap_name, size_t len, unsigned int heap_flags) {
++    int ion_fd = GetIonFd();
++    if (ion_fd < 0) return -1;
++
++    uint32_t heap_mask = GetHeapMask(heap_name.c_str());
++
++    struct ion_new_allocation_data data = {
++        .len = len,
++        .heap_id_mask = heap_mask,
++        .flags = heap_flags,
++    };
++    int ret = TEMP_FAILURE_RETRY(ioctl(ion_fd, ION_IOC_NEW_ALLOC, &data));
++    if (ret == 0 && data.fd >= 0) {
++        return data.fd;
++    }
++
++    struct ion_allocation_data legacy_data = {
++        .len = len,
++        .align = 0,
++        .heap_id_mask = heap_mask,
++        .flags = heap_flags,
++    };
++    ret = TEMP_FAILURE_RETRY(ioctl(ion_fd, ION_IOC_ALLOC, &legacy_data));
++    if (ret == 0 && legacy_data.handle > 0) {
++        struct ion_fd_data fd_data = {
++            .handle = legacy_data.handle,
++        };
++        int share_ret = TEMP_FAILURE_RETRY(ioctl(ion_fd, ION_IOC_SHARE, &fd_data));
++        struct ion_handle_data free_data = {
++            .handle = legacy_data.handle,
++        };
++        ioctl(ion_fd, ION_IOC_FREE, &free_data);
++        if (share_ret == 0 && fd_data.fd >= 0) {
++            return fd_data.fd;
++        }
++    }
++
++    return -1;
++}
++
+ int BufferAllocator::OpenDmabufHeap(const std::string& heap_name) {
+     std::shared_lock<std::shared_mutex> slock(dmabuf_heap_fd_mutex_);
+ 
+@@ -62,7 +167,6 @@ int BufferAllocator::OpenDmabufHeap(const std::string& heap_name) {
+     std::string heap_path = kDmaHeapRoot + heap_name;
+     int fd = TEMP_FAILURE_RETRY(open(heap_path.c_str(), O_RDONLY | O_CLOEXEC));
+     if (fd < 0) {
+-        PLOG(ERROR) << "Could not open DMA-BUF heap named: " << heap_name;
+         return -errno;
+     }
+ 
+@@ -77,10 +181,17 @@ BufferAllocator::BufferAllocator() = default;
+ // User-provided and defaulted in the implementation so the compiler will not inline it
+ BufferAllocator::~BufferAllocator() = default;
+ 
+-[[deprecated("ION support is removed. Retained for binary compatibility.")]]
+-int BufferAllocator::MapNameToIonHeap(const std::string&, const std::string&, unsigned int,
+-                                      unsigned int, unsigned int) {
+-    /* If ION support is not detected, ignore the mappings */
++int BufferAllocator::MapNameToIonHeap(const std::string& name, const std::string& ion_heap_name,
++                                      unsigned int, unsigned int, unsigned int) {
++    GetIonFd();
++    uint32_t mask = GetHeapMask(ion_heap_name.c_str());
++    pthread_mutex_lock(&g_ion_mutex);
++    if (g_num_ion_heaps < MAX_ION_HEAPS) {
++        strlcpy(g_ion_heaps[g_num_ion_heaps].name, name.c_str(), sizeof(g_ion_heaps[g_num_ion_heaps].name));
++        g_ion_heaps[g_num_ion_heaps].mask = mask;
++        g_num_ion_heaps++;
++    }
++    pthread_mutex_unlock(&g_ion_mutex);
+     return 0;
+ }
+ 
+@@ -117,14 +228,23 @@ int BufferAllocator::DmabufSetName(unsigned int dmabuf_fd, const std::string& na
+     return TEMP_FAILURE_RETRY(ioctl(dmabuf_fd, DMA_BUF_SET_NAME_B, truncated_name.c_str()));
+ }
+ 
+-int BufferAllocator::Alloc(const std::string& heap_name, size_t len, unsigned int) {
++int BufferAllocator::Alloc(const std::string& heap_name, size_t len, unsigned int heap_flags) {
+     int dma_buf_heap_fd = OpenDmabufHeap(heap_name);
+-    if (dma_buf_heap_fd < 0) return -1;
++    if (dma_buf_heap_fd >= 0) {
++        return DmabufAlloc(heap_name, len, dma_buf_heap_fd);
++    }
++
++    int ion_alloc_fd = IonAlloc(heap_name, len, heap_flags);
++    if (ion_alloc_fd >= 0) {
++        if (DmabufSetName(ion_alloc_fd, heap_name))
++            PLOG(WARNING) << "Unable to name DMA buffer for: " << heap_name;
++        return ion_alloc_fd;
++    }
+ 
+-    return DmabufAlloc(heap_name, len, dma_buf_heap_fd);
++    PLOG(ERROR) << "Could not allocate buffer from DMA-BUF or ION heap: " << heap_name;
++    return -1;
+ }
+ 
+-[[deprecated("ION support is removed. Retained for binary compatibility.")]]
+ int BufferAllocator::Alloc(const std::string& heap_name, size_t len,
+                            unsigned int heap_flags, size_t) {
+     return Alloc(heap_name, len, heap_flags);
+@@ -143,9 +263,9 @@ int BufferAllocator::AllocSystem(bool cpu_access_needed, size_t len, unsigned in
+ 
+         if (uncached_dmabuf_system_heap_support) {
+             int dma_buf_heap_fd = OpenDmabufHeap(kDmabufSystemUncachedHeapName);
+-            return (dma_buf_heap_fd < 0)
+-                           ? dma_buf_heap_fd
+-                           : DmabufAlloc(kDmabufSystemUncachedHeapName, len, dma_buf_heap_fd);
++            if (dma_buf_heap_fd >= 0) {
++                return DmabufAlloc(kDmabufSystemUncachedHeapName, len, dma_buf_heap_fd);
++            }
+         }
+     }
+ 
+@@ -156,7 +276,6 @@ int BufferAllocator::AllocSystem(bool cpu_access_needed, size_t len, unsigned in
+     return Alloc(kDmabufSystemHeapName, len, heap_flags);
+ }
+ 
+-[[deprecated("ION support is removed. Retained for binary compatibility.")]]
+ int BufferAllocator::AllocSystem(bool cpu_access_needed, size_t len, unsigned int heap_flags,
+                                  size_t) {
+     return AllocSystem(cpu_access_needed, len, heap_flags);
+@@ -177,7 +296,6 @@ int BufferAllocator::CpuSyncStart(unsigned int dmabuf_fd, SyncType sync_type) {
+     return ret;
+ }
+ 
+-[[deprecated("ION support is removed. Retained for binary compatibility.")]]
+ int BufferAllocator::CpuSyncStart(unsigned int dmabuf_fd, SyncType sync_type,
+                                   const CustomCpuSyncLegacyIon&, void*) {
+     return CpuSyncStart(dmabuf_fd, sync_type);
+@@ -190,7 +308,6 @@ int BufferAllocator::CpuSyncEnd(unsigned int dmabuf_fd, SyncType sync_type) {
+     return ret;
+ }
+ 
+-[[deprecated("ION support is removed. Retained for binary compatibility.")]]
+ int BufferAllocator::CpuSyncEnd(unsigned int dmabuf_fd, SyncType sync_type,
+                                 const CustomCpuSyncLegacyIon&, void*) {
+     return CpuSyncEnd(dmabuf_fd, sync_type);
+@@ -212,7 +329,6 @@ std::unordered_set<std::string> BufferAllocator::GetDmabufHeapList() {
+     return heap_list;
+ }
+ 
+-[[deprecated("ION support is removed. Retained for binary compatibility.")]]
+ bool BufferAllocator::CheckIonSupport() {
+-    return false;
++    return GetIonFd() >= 0;
+ }
+-- 
+2.43.0
+
