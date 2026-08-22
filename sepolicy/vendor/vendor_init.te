@@ -5,8 +5,11 @@ set_prop(vendor_init, vendor_mtk_audio_prop)
 set_prop(vendor_init, vendor_mtk_pq_prop)
 set_prop(vendor_init, vendor_mtk_wfc_serv_prop)
 get_prop(vendor_init, vts_status_prop)
-rw_dir_file(vendor_init, sysfs_leds)
-rw_dir_file(vendor_init, sysfs_ged)
+r_dir_file(vendor_init, sysfs_leds)
+allow vendor_init sysfs_leds:file rw_file_perms;
+
+r_dir_file(vendor_init, sysfs_ged)
+allow vendor_init sysfs_ged:file rw_file_perms;
 
 # Allow writing to proc nodes
 allow vendor_init proc:file w_file_perms;
