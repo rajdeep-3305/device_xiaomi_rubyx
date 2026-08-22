@@ -1,0 +1,62 @@
+From aab644567b7c0cf637f4b82dd2acc1d2aa197532 Mon Sep 17 00:00:00 2001
+From: rajdeep-3305 <rajdeepbiswas3305@gmail.com>
+Date: Sat, 22 Aug 2026 14:23:57 +0000
+Subject: [PATCH] lineage: generator: Fix variable expansion for Android 17
+
+- Do not fail when lineageVars variables are empty during Soong bootstrap.
+- Disable Sbox sandbox for lineage_generator to allow in-tree script execution.
+
+Signed-off-by: rajdeep-3305 <rajdeepbiswas3305@gmail.com>
+---
+ build/soong/generator/generator.go | 7 ++-----
+ build/soong/generator/variables.go | 9 +++++----
+ 2 files changed, 7 insertions(+), 9 deletions(-)
+
+diff --git a/build/soong/generator/generator.go b/build/soong/generator/generator.go
+index c70ef5f..b610f07 100644
+--- a/build/soong/generator/generator.go
++++ b/build/soong/generator/generator.go
+@@ -258,11 +258,8 @@ func (g *Module) GenerateAndroidBuildActions(ctx android.ModuleContext) {
+ 	// Dummy output dep
+ 	dummyDep := android.PathForModuleGen(ctx, ".dummy_dep")
+ 
+-	genDir := android.PathForModuleGen(ctx)
+-	manifestPath := android.PathForModuleOut(ctx, "generator.sbox.textproto")
+-
+-	// Use a RuleBuilder to create a rule that runs the command inside an sbox sandbox.
+-	rule := android.NewRuleBuilder(pctx, ctx).Sbox(genDir, manifestPath)
++	// Use a RuleBuilder to create a rule that runs the command directly in tree.
++	rule := android.NewRuleBuilder(pctx, ctx)
+ 
+ 	rule.Command().
+ 		Text(rawCommand).
+diff --git a/build/soong/generator/variables.go b/build/soong/generator/variables.go
+index 8485f94..b1bf798 100644
+--- a/build/soong/generator/variables.go
++++ b/build/soong/generator/variables.go
+@@ -2,6 +2,7 @@ package generator
+ 
+ import (
+ 	"fmt"
++	"strings"
+ 
+ 	"android/soong/android"
+ )
+@@ -13,10 +14,10 @@ func lineageExpandVariables(ctx android.ModuleContext, in string) string {
+ 		if lineageVars.IsSet(name) {
+ 			return lineageVars.String(name), nil
+ 		}
+-		// This variable is not for us, restore what the original
+-		// variable string will have looked like for an Expand
+-		// that comes later.
+-		return fmt.Sprintf("$(%s)", name), nil
++		if name == "location" || name == "genDir" || strings.HasPrefix(name, "location ") {
++			return fmt.Sprintf("$(%s)", name), nil
++		}
++		return "", nil
+ 	})
+ 
+ 	if err != nil {
+-- 
+2.43.0
+

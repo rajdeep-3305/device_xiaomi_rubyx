@@ -1,0 +1,28 @@
+From b962597f307f5893d1c59ad92b02d4e05de94b79 Mon Sep 17 00:00:00 2001
+From: rajdeep-3305 <rajdeepbiswas3305@gmail.com>
+Date: Sat, 22 Aug 2026 14:23:46 +0000
+Subject: [PATCH] libion: Add anyapex to apex_available
+
+- Required when libion_headers is referenced by libdmabufheap in APEX modules.
+
+Change-Id: I9e4668190a365782354167ab3cc2535a93f7e70b
+Signed-off-by: rajdeep-3305 <rajdeepbiswas3305@gmail.com>
+---
+ Android.bp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Android.bp b/Android.bp
+index 0211d98..73e6b6c 100644
+--- a/Android.bp
++++ b/Android.bp
+@@ -10,6 +10,7 @@ cc_defaults {
+     min_sdk_version: "29",
+     apex_available: [
+         "//apex_available:platform",
++        "//apex_available:anyapex",
+         "com.android.media.swcodec",
+         "test_com.android.media.swcodec",
+     ],
+-- 
+2.43.0
+
