@@ -919,6 +919,15 @@ on boot
     write /proc/sys/vm/lowmem_reserve_ratio "256 256 32"
 
     # Scheduler
+    write /sys/block/sda/queue/scheduler mq-deadline
     write /sys/block/sda/queue/scheduler deadline
+    write /sys/block/sdb/queue/scheduler mq-deadline
     write /sys/block/sdb/queue/scheduler deadline
+    write /sys/block/sdc/queue/scheduler mq-deadline
     write /sys/block/sdc/queue/scheduler deadline
+    write /sys/block/sdd/queue/scheduler mq-deadline
+    write /sys/block/sdd/queue/scheduler deadline
+    write /sys/block/sde/queue/scheduler mq-deadline
+    write /sys/block/sde/queue/scheduler deadline
+    write /sys/block/sdf/queue/scheduler mq-deadline
+    write /sys/block/sdf/queue/scheduler deadline
