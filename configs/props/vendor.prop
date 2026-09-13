@@ -110,9 +110,10 @@ ro.surface_flinger.protected_contents=true
 ro.surface_flinger.set_display_power_timer_ms=1000
 ro.surface_flinger.set_idle_timer_ms=4000
 ro.surface_flinger.set_touch_timer_ms=4000
-ro.surface_flinger.supports_background_blur=1
-ro.surface_flinger.uclamp.min=128
-ro.surface_flinger.use_content_detection_for_refresh_rate=true
+ro.surface_flinger.supports_background_blur=0
+ro.sf.blurs_are_expensive=1
+ro.surface_flinger.uclamp.min=384
+ro.surface_flinger.use_content_detection_for_refresh_rate=false
 ro.vendor.composer_version=2.3
 ro.vendor.mml.mtk_mml_support=0
 ro.vendor.mtk_aal_support=1
@@ -286,7 +287,6 @@ ro.vendor.mtk_svp_on_mtee_support=1
 ro.vendor.mtk_tee_gp_support=1
 
 # HWUI
-debug.hwui.renderer=skiagl
 debug.hwui.skia_tracing_enabled=false
 debug.hwui.skia_use_perfetto_track_events=false
 debug.hwui.target_cpu_time_percent=50
