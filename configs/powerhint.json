@@ -292,7 +292,19 @@
       "PowerHint": "INTERACTION",
       "Node": "TAUclampMin",
       "Duration": 600,
-      "Value": "60"
+      "Value": "70"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "CPULittleClusterMinFreq",
+      "Duration": 300,
+      "Value": "1260000"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "CPUBigClusterMinFreq",
+      "Duration": 300,
+      "Value": "1300000"
     },
     {
       "PowerHint": "INTERACTION",
