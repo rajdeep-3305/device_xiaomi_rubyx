@@ -26,12 +26,12 @@ on init
     chown system system /dev/cpuctl/camera-daemon/cpu.uclamp.min
 
     # Assign reasonable ceiling values for socket rcv/snd buffers
-    write /proc/sys/net/core/rmem_max  8388608
-    write /proc/sys/net/core/wmem_max  8388608
+    write /proc/sys/net/core/rmem_max  16777216
+    write /proc/sys/net/core/wmem_max  16777216
 
     # Assign TCP write/read memory size.
-    write /proc/sys/net/ipv4/tcp_rmem "2097152 4194304 8388608"
-    write /proc/sys/net/ipv4/tcp_wmem "262144 524288 8388608" 
+    write /proc/sys/net/ipv4/tcp_rmem "2097152 4194304 16777216"
+    write /proc/sys/net/ipv4/tcp_wmem "262144 524288 16777216"
     
 # mount different fs start
 
