@@ -124,8 +124,8 @@ BOARD_SUPER_PARTITION_GROUPS := mediatek_dynamic_partitions
 BOARD_MEDIATEK_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product vendor
 BOARD_MEDIATEK_DYNAMIC_PARTITIONS_SIZE := 9122611200 # BOARD_SUPER_PARTITION_SIZE - 4MB
 
-include vendor/lineage/config/BoardConfigKernel.mk
--include vendor/lineage/config/BoardConfigReservedSize.mk
+include vendor/voltage/config/BoardConfigKernel.mk
+-include vendor/voltage/config/BoardConfigReservedSize.mk
 
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -157,7 +157,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 ENABLE_VENDOR_RIL_SERVICE := true
 
 # SELinux
-include device/lineage/sepolicy/libion/sepolicy.mk
+include device/voltage/sepolicy/libion/sepolicy.mk
 include device/mediatek/sepolicy_vndr/SEPolicy.mk
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public

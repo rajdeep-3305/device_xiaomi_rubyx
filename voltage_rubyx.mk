@@ -1,5 +1,6 @@
 #
 # SPDX-FileCopyrightText: 2023-2025 The LineageOS Project
+# SPDX-FileCopyrightText: 2026 The VoltageOS Project
 # SPDX-License-Identifier: Apache-2.0
 #
 
@@ -10,10 +11,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from device makefile.
 $(call inherit-product, device/xiaomi/rubyx/device.mk)
 
-# Inherit some common LineageOS stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit some common Voltage stuff.
+$(call inherit-product, vendor/voltage/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineage_rubyx
+PRODUCT_NAME := voltage_rubyx
 PRODUCT_DEVICE := rubyx
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_BRAND := Redmi

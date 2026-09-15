@@ -81,10 +81,6 @@ dalvik.vm.dex2oat-filter=speed
 dalvik.vm.image-dex2oat-filter=speed
 dalvik.vm.dexopt.secondary=true
 persist.bg.dexopt.enable=true
-pm.dexopt.install=speed-profile
-pm.dexopt.bg-dexopt=speed-profile
-pm.dexopt.boot=verify
-pm.dexopt.first-boot=verify
 
 # Display
 debug.mediatek.appgamepq_compress=1
