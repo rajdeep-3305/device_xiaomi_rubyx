@@ -39,7 +39,7 @@ apply_patch_dir() {
         local subject
         subject="$(grep '^Subject: ' "$patch" | sed 's/Subject: \[PATCH[^]]*\] //' | head -1)"
 
-        if git log --oneline | grep -qF "$subject"; then
+        if git log --oneline | grep -qF "$subject" || git apply --reverse --check "$patch" >/dev/null 2>&1; then
             info "Already applied: $patch_name — skipping"
         else
             info "Applying: $patch_name → $repo_path"
