@@ -9,6 +9,9 @@
 
     <!-- Blur radius behind Notification Shade -->
     <dimen name="max_shade_window_blur_radius">12dp</dimen>
+ 
+    <!-- Blur radius for the power menu -->
+    <dimen name="global_actions_blur_radius">12dp</dimen>
 
     <!-- Location on the screen of the center of the fingerprint sensor. For devices with under
      display fingerprint sensors, this directly corresponds to the fingerprint sensor's location.
