@@ -47,3 +47,7 @@ genfscon sysfs /devices/platform/19030000.vpu_core0/wakeup                      
 genfscon sysfs /devices/platform/19031000.vpu_core1/wakeup                                                  u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/1a000000.camsys/wakeup                                                     u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/usb0/wakeup                                                                u:object_r:sysfs_wakeup:s0
+
+# Axion
+genfscon proc /sys/vm/vfs_cache_pressure            u:object_r:proc_drop_caches:s0
+genfscon proc /sys/vm/dirty_ratio                   u:object_r:proc_dirty:s0
