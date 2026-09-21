@@ -308,3 +308,17 @@ ro.virtual_ab.worker_thread_priority=0
 ro.zram.mark_idle_delay_mins=60
 ro.zram.first_wb_delay_mins=180
 ro.zram.periodic_wb_delay_hours=24
+
+
+
+# HWUI memory caching
+ro.hwui.texture_cache_size=96
+ro.hwui.layer_cache_size=64
+ro.hwui.path_cache_size=32
+ro.hwui.shape_cache_size=6
+ro.hwui.drop_shadow_cache_size=8
+ro.hwui.r_buffer_cache_size=12
+ro.hwui.text_small_cache_width=2048
+ro.hwui.text_small_cache_height=2048
+ro.hwui.text_large_cache_width=4096
+ro.hwui.text_large_cache_height=2048
