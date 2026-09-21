@@ -9,6 +9,7 @@ persist.sys.sf.native_mode=0
 
 # Dalvik
 dalvik.vm.dex2oat64.enabled=true
+dalvik.vm.madvise-random=true
 
 # eBPF
 ro.bpf.kver_override=5.10.239
