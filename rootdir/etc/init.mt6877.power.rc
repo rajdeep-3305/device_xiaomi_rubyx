@@ -79,7 +79,7 @@ on enable-low-power
     write /sys/block/dm-5/queue/read_ahead_kb 128
 
     # sched
-    write /proc/sys/kernel/sched_migration_cost_ns 200000
+    write /proc/sys/kernel/sched_migration_cost_ns 500000
     write /proc/sys/kernel/sched_util_clamp_max 1024
 
     # Reclaim tuning
