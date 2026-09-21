@@ -289,7 +289,7 @@ ro.vendor.mtk_tee_gp_support=1
 # HWUI
 debug.hwui.target_cpu_time_percent=50
 debug.hwui.use_hint_manager=true
-debug.hwui.use_buffer_age=true
+debug.hwui.use_buffer_age=false
 
 # Update engine
 ro.virtual_ab.compression.threads=true
