@@ -118,9 +118,9 @@ PRODUCT_VENDOR_PROPERTIES += \
     dalvik.vm.heapstartsize=24m \
     dalvik.vm.heapgrowthlimit=384m \
     dalvik.vm.heapsize=512m \
-    dalvik.vm.heaptargetutilization=0.42 \
+    dalvik.vm.heaptargetutilization=0.5 \
     dalvik.vm.heapminfree=8m \
-    dalvik.vm.heapmaxfree=56m
+    dalvik.vm.heapmaxfree=32m
 
 # Dex - Debug
 ART_BUILD_TARGET_NDEBUG := true
