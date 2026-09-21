@@ -6,6 +6,12 @@
 <resources>
     <!-- Radius of the software rounded corners at the bottom of the display in its natural
         orientation. If zero, the value of rounded_corner_radius is used. -->
+    <!-- Default blur radius for cross-window background blurs -->
+    <dimen name="default_background_blur_radius">12dp</dimen>
+
+    <!-- Blur radius for letterbox background -->
+    <dimen name="config_letterboxBackgroundWallpaperBlurRadius">12dp</dimen>
+
     <dimen name="rounded_corner_radius_bottom">70px</dimen>
 
     <!-- Radius of the software rounded corners at the top of the display in its natural
