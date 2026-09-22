@@ -10,6 +10,9 @@ import /vendor/etc/init/hw/init.batterysecret.rc
 import /vendor/etc/init/hw/init.mi_thermald.rc
 
 on init
+    # enforce opengl
+    setprop debug.hwui.renderer skiagl
+
     # add this link for cust/rescue/opconfig/opcust mount
     symlink /dev/block /dev/block/bootdevice
 
