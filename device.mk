@@ -426,6 +426,8 @@ $(call inherit-product-if-exists, device/xiaomi/miuicamera-rubyx/device.mk)
 $(call inherit-product, vendor/xiaomi/rubyx/rubyx-vendor.mk)
 
 # Axion Stuff
+TARGET_DEVICE := rubyx
+AXION_SOC := mt6877
 PERF_GOV_SUPPORTED := true
 PERF_DEFAULT_GOV := schedutil
 PERF_ANIM_OVERRIDE := true
