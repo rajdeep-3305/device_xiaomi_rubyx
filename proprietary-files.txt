@@ -1962,8 +1962,6 @@ vendor/firmware/aw8697_haptic.bin
 vendor/firmware/aw8697_rtp_1.bin
 
 # Wi-Fi
-vendor/bin/wlan_assistant
-vendor/etc/init/wlan_assistant.rc
 vendor/etc/wifi/passpointProfile.conf
 vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
 
