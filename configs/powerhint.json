@@ -442,7 +442,7 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "GPUBlockBoost",
       "Duration": 0,
-      "Value": "70"
+      "Value": "60"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
@@ -640,12 +640,6 @@
       "Node": "MaliJSSchedPeriod",
       "Duration": 0,
       "Value": "50"
-    },
-    {
-      "PowerHint": "SYSTEM_UI",
-      "Node": "DRAMOppMin",
-      "Duration": 0,
-      "Value": "1"
     },
     {
       "PowerHint": "SYSTEM_UI",
