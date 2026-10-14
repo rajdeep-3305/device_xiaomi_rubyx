@@ -29,3 +29,6 @@ set_prop(hal_power_default, vendor_mtk_powerhal_prop)
 # DMQoS
 allow hal_power_default cpu_dma_latency_device:file rw_file_perms;
 allow hal_power_default cpu_dma_latency_device:chr_file rw_file_perms;
+
+# Allow PowerHAL to access CPU perf counters (SWPM)
+allow hal_power_default self:perf_event { cpu };
