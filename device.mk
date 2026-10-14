@@ -116,9 +116,9 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 # Dalvik
 PRODUCT_VENDOR_PROPERTIES += \
     dalvik.vm.heapstartsize=24m \
-    dalvik.vm.heapgrowthlimit=384m \
-    dalvik.vm.heapsize=512m \
-    dalvik.vm.heaptargetutilization=0.5 \
+    dalvik.vm.heapgrowthlimit=448m \
+    dalvik.vm.heapsize=640m \
+    dalvik.vm.heaptargetutilization=0.6 \
     dalvik.vm.heapminfree=8m \
     dalvik.vm.heapmaxfree=32m
 
