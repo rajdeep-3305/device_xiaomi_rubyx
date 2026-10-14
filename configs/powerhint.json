@@ -466,7 +466,7 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "GPUDVFSMargin",
       "Duration": 0,
-      "Value": "45"
+      "Value": "60"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
@@ -904,6 +904,186 @@
       "Node": "DRAMOppMin",
       "Duration": 0,
       "Value": "1"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "TAUclampMin",
+      "Duration": 0,
+      "Value": "80"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "TAUclampLatency",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "FGUclampMin",
+      "Duration": 0,
+      "Value": "60"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "GPUBlockBoost",
+      "Duration": 0,
+      "Value": "70"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "GPUSchedMode",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "GPUDVFSMargin",
+      "Duration": 0,
+      "Value": "60"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "GPUDVFSLoadingStep",
+      "Duration": 0,
+      "Value": "15"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "DRAMOppMin",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "CCIMode",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "CPUBigClusterMinFreq",
+      "Duration": 0,
+      "Value": "1540000"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "CPULittleClusterMinFreq",
+      "Duration": 0,
+      "Value": "1150000"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "TAUclampMin",
+      "Duration": 0,
+      "Value": "80"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "TAUclampLatency",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "FGUclampMin",
+      "Duration": 0,
+      "Value": "60"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "GPUBlockBoost",
+      "Duration": 0,
+      "Value": "70"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "GPUSchedMode",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "GPUDVFSMargin",
+      "Duration": 0,
+      "Value": "60"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "GPUDVFSLoadingStep",
+      "Duration": 0,
+      "Value": "15"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "DRAMOppMin",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "CCIMode",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "CPUBigClusterMinFreq",
+      "Duration": 0,
+      "Value": "1540000"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "CPULittleClusterMinFreq",
+      "Duration": 0,
+      "Value": "1150000"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Node": "TAUclampMin",
+      "Duration": 0,
+      "Value": "80"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Node": "FGUclampMin",
+      "Duration": 0,
+      "Value": "60"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Node": "GPUBlockBoost",
+      "Duration": 0,
+      "Value": "70"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Node": "GPUDVFSMargin",
+      "Duration": 0,
+      "Value": "75"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Node": "GPUDVFSLoadingStep",
+      "Duration": 0,
+      "Value": "16"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Node": "DRAMOppMin",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Node": "CCIMode",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 2000,
+      "Value": "44"
     }
   ]
 }
