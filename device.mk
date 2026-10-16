@@ -254,6 +254,7 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 
 # Parts
 PRODUCT_PACKAGES += \
+    TelephonyOverlayRuby \
     XiaomiParts
 
 # Permissions
@@ -355,7 +356,9 @@ PRODUCT_COPY_FILES += \
 # Ship libbase_shim as product package
 PRODUCT_PACKAGES += \
     libbase_shim \
-    libaudioclient_shim
+    libaudioclient_shim \
+    libgui_shim \
+    libui_shim
 
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 31
