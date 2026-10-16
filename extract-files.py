@@ -32,9 +32,22 @@ lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
 }
 
+
+def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
+    return f'{lib}-{partition}' if partition == 'vendor' else None
+
+
+lib_fixups: lib_fixups_user_type = {
+    **lib_fixups,
+    ('vendor.mediatek.hardware.videotelephony@1.0',): lib_fixup_vendor_suffix,
+}
+
 blob_fixups: blob_fixups_user_type = {
     'vendor/bin/mi_thermald': blob_fixup()
         .binary_regex_replace(b'%d/on', b'%d/..'),
+
+    'system_ext/priv-app/ImsService/ImsService.apk': blob_fixup()
+        .apktool_patch('blob-patches/ImsService.patch'),
     
     ('vendor/bin/hw/android.hardware.gnss-service.mediatek',
      'vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so'): blob_fixup()
