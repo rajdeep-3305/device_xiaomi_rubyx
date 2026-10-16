@@ -324,3 +324,5 @@ ro.hwui.text_small_cache_width=2048
 ro.hwui.text_small_cache_height=2048
 ro.hwui.text_large_cache_width=4096
 ro.hwui.text_large_cache_height=2048
+persist.vendor.mtk_ct_volte_support=3
+persist.vendor.volte_support=1
