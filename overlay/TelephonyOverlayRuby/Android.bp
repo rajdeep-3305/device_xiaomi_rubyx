@@ -1,0 +1,6 @@
+android_app_config {
+    name: "TelephonyOverlayRuby",
+    target: {
+        shared_libs: ["libmediatek-ims"],
+    },
+}

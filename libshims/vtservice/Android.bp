@@ -1,0 +1,6 @@
+cc_library_shim {
+    name: "libshim_vtservice",
+    stems: ["libshim_vtservice"],
+    srcs: ["libshim_vtservice.cpp"],
+    flags: ["-std=c++17"],
+}
